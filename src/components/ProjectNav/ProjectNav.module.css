@@ -1,0 +1,44 @@
+.nav {
+  background: var(--subnav-bg, transparent);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 24px var(--gutter);
+}
+
+.arrow {
+  display: block;
+  width: 26px;
+  height: 26px;
+  background: var(--arrow-prev, url("/projects/mycora/nav-arrow.svg")) no-repeat center /
+    contain;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.next {
+  background-image: var(--arrow-next, url("/projects/mycora/nav-arrow-2.svg"));
+  transform: rotate(180deg);
+}
+
+.arrow:hover {
+  opacity: 0.6;
+}
+
+.next:hover {
+  transform: rotate(180deg) translateX(2px);
+}
+
+.arrow:not(.next):hover {
+  transform: translateX(-2px);
+}
+
+/* Kept in the layout so the row stays balanced at the ends of the series. */
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+}

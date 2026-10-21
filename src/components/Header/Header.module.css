@@ -1,0 +1,94 @@
+.header {
+  display: flex;
+  align-items: center;
+  /* Mobile hides the wordmark and the contact link, leaving the pill centred */
+  justify-content: center;
+  padding: 24px clamp(12px, 9.9vw, 37px);
+}
+
+.wordmark,
+.contact {
+  display: none;
+}
+
+/* Only the nav pill floats while scrolling — the wordmark and Contact Me
+   stay in normal flow and scroll away with the page. `fixed` (rather than
+   `sticky`) because the header row itself is too short to give a sticky
+   child anywhere to "stick" within — it would just scroll off with it. */
+.nav {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(2px, 2.5vw, 19px);
+  max-width: calc(100% - 2 * clamp(12px, 9.9vw, 37px));
+  padding: 10px clamp(6px, 3vw, 22px);
+  border-radius: var(--radius-pill);
+  background: var(--nav-bg);
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px clamp(8px, 2.5vw, 15px);
+  border-radius: 21px;
+  font-size: clamp(13px, 3.2vw, 16px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+@media (--tablet) {
+  .nav {
+    padding: 14px clamp(10px, 5.9vw, 22px);
+  }
+
+  .navLink {
+    padding: 6px clamp(10px, 4vw, 15px);
+  }
+}
+
+.navLink:hover {
+  background: var(--color-divider);
+}
+
+.navLinkActive,
+.navLinkActive:hover {
+  background: var(--color-fg);
+  color: var(--color-bg);
+}
+
+@media (--tablet) {
+  .header {
+    justify-content: space-between;
+    padding: 24px 62px;
+  }
+
+  .wordmark,
+  .contact {
+    display: block;
+  }
+
+  .wordmark {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .contact {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: -0.005em;
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+}

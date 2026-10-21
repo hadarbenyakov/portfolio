@@ -1,0 +1,563 @@
+/* BigID brand palette, read from the shipped dashboard screens
+   (get_design_context on the "Adoption Rate" frame): deep purple #44189d,
+   mid purple #6749be, pink #e92373 — BigID's own colors, not invented. */
+
+.page {
+  --purple-deep: #2a0f66;
+  --purple: #44189d;
+  --purple-mid: #6749be;
+  --pink: #e92373;
+  --ink: #16121f;
+  --ink-muted: #6b6578;
+  --ink-faint: #948fa0;
+  --bg-tint: #faf8ff;
+  --border: #e6e1f2;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bleed {
+  width: 100%;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  padding-top: clamp(28px, 5vw, 56px);
+  padding-bottom: clamp(56px, 9vw, 96px);
+  overflow: hidden;
+}
+
+/* Center-focused carousel: every item sits on the same track, but the one
+   nearest the middle is driven to scale(1) / full opacity while its
+   neighbours recede — JS (HeroCarousel) positions the track and sets each
+   item's scale/opacity per step, this file just lays out the shared frame. */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 clamp(16px, 4vw, 64px),
+    #000 calc(100% - clamp(16px, 4vw, 64px)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 clamp(16px, 4vw, 64px),
+    #000 calc(100% - clamp(16px, 4vw, 64px)),
+    transparent 100%
+  );
+}
+
+.carouselTrack {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: clamp(16px, 3vw, 32px);
+  padding: 24px 0;
+}
+
+.carouselItem {
+  flex: 0 0 auto;
+  width: clamp(300px, 50vw, 720px);
+  transform-origin: 50% 50%;
+}
+
+.carouselMac {
+  width: 100%;
+}
+
+.heroText {
+  max-width: 760px;
+  margin: clamp(40px, 7vw, 72px) auto 0;
+  padding: 0 var(--gutter);
+  text-align: center;
+}
+
+.heroBadge {
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--pink);
+}
+
+.heroTitle {
+  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  font-size: clamp(32px, 5.4vw, 60px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.heroTagline {
+  margin: 20px auto 0;
+  font-size: clamp(16px, 2vw, 19px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+/* ---------- about BigID (bleed) ---------- */
+
+.about {
+  background: var(--purple);
+  color: #ffffff;
+}
+
+.aboutInner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(32px, 6vw, 89px);
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(64px, 14vw, 200px) var(--gutter);
+}
+
+.aboutLogo {
+  flex: 0 0 auto;
+}
+
+.aboutLogoMark {
+  display: block;
+  width: clamp(140px, 20vw, 292px);
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.aboutText {
+  flex: 1 1 480px;
+  max-width: 878px;
+  font-size: clamp(19px, 2.2vw, 25px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+/* ---------- shared section furniture ---------- */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 110px) var(--gutter);
+}
+
+.intro {
+  max-width: 720px;
+}
+
+.eyebrowDark {
+  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.lede {
+  margin-top: 18px;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* ---------- The Problem ---------- */
+
+.problemSection {
+  align-items: center;
+  padding-top: clamp(80px, 18vw, 260px);
+}
+
+.problemIntro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 1138px;
+  text-align: center;
+}
+
+.problemTitle {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.problemLede {
+  font-size: clamp(19px, 2.2vw, 27px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* ---------- HMW statement ---------- */
+/* Its own section, generously padded on both sides, so it reads as a full
+   beat on its own rather than a footnote tacked under The Problem. */
+
+.statementSection {
+  align-items: center;
+  padding-top: clamp(80px, 16vw, 220px);
+  padding-bottom: clamp(80px, 16vw, 220px);
+}
+
+.statement {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 4vw, 50px);
+  width: 100%;
+  padding: clamp(32px, 7vw, 86px) clamp(24px, 4vw, 36px);
+  border-radius: 28px;
+  background: linear-gradient(90deg, var(--purple) 0%, var(--pink) 100%);
+}
+
+.statementHmw {
+  flex: 0 0 auto;
+  width: 336px;
+  max-width: 100%;
+  font-size: clamp(48px, 7vw, 94px);
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  color: #ffffff;
+}
+
+.statementText {
+  flex: 1 1 320px;
+  font-size: clamp(20px, 2.8vw, 34px);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+/* ---------- research ---------- */
+
+.shotsGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.shotRow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shotMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.shotLogo {
+  position: relative;
+  width: 100%;
+  max-width: 220px;
+  height: 48px;
+}
+
+.shotLogo img {
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Flex-wrap, not a grid — each shot keeps its own real aspect ratio
+   (set inline per item) and is scaled to a shared row height, so sizes
+   differ instead of being cropped into a uniform cell. */
+.shotGrid {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.shotThumbWrap {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(140px, 20vw, 260px);
+  /* Caps extreme-aspect shots (e.g. a very wide, short screenshot) from
+     ballooning past their neighbours at the shared row height — object-fit:
+     contain on the image inside keeps it at its real proportions, just
+     letterboxed within this box instead of stretching to fill it. */
+  max-width: 420px;
+}
+
+.shotThumb {
+  object-fit: contain;
+}
+
+/* ---------- framework ---------- */
+
+.pillarGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-top: 48px;
+}
+
+.pillarCard {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(66, 66, 66, 0.14);
+}
+
+.pillarNum {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--pink);
+}
+
+.pillarTitle {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+
+.pillarQuestion {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.92);
+}
+
+.pillarBody {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.pillarMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  list-style: none;
+}
+
+.pillarMetrics li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000000;
+  background: rgba(23, 23, 23, 0.12);
+}
+
+/* ---------- claude design tries (bleed) ---------- */
+
+.claudeTries {
+  background: linear-gradient(180deg, var(--purple-deep) 0%, var(--purple) 100%);
+}
+
+.claudeTriesInner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  /* No right padding here on purpose — .claudeTriesRow carries its own
+     trailing gutter so the scroller's content (not its box) ends flush
+     with the viewport edge, letting the last shot scroll all the way
+     into view instead of stopping short at a padded boundary. */
+  padding: clamp(56px, 9vw, 110px) 0 clamp(56px, 9vw, 110px) var(--gutter);
+}
+
+.claudeTriesTitle {
+  font-size: 40px;
+  font-weight: 400;
+  color: #ffffff;
+  padding-right: var(--gutter);
+}
+
+.claudeTriesRow {
+  display: flex;
+  gap: clamp(20px, 3vw, 37px);
+  width: 100%;
+  overflow-x: auto;
+  padding-right: var(--gutter);
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.claudeTriesShot {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(260px, 34vw, 412px);
+  width: auto;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ---------- product screens ---------- */
+
+.screenBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin-top: 56px;
+}
+
+.screenBlock:first-of-type {
+  margin-top: 48px;
+}
+
+.screenMac {
+  width: 100%;
+  filter: drop-shadow(0 24px 48px rgba(68, 24, 157, 0.16));
+}
+
+.screenCaption {
+  max-width: 480px;
+}
+
+.screenTitle {
+  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--purple);
+}
+
+.screenBody {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* ---------- closing ---------- */
+
+.closing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(64px, 10vw, 110px) var(--gutter) clamp(80px, 13vw, 140px);
+  text-align: center;
+}
+
+.closingMark {
+  opacity: 0.8;
+}
+
+.closingText {
+  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  max-width: 640px;
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.closingNote {
+  max-width: 480px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink-faint);
+}
+
+/* ================= tablet ================= */
+
+@media (--tablet) {
+  .pillarGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shotRow {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+
+  .shotMeta {
+    flex: 0 0 160px;
+  }
+}
+
+/* ================= desktop ================= */
+
+@media (--desktop) {
+  /* Narrower than the site-wide 120px gutter on purpose — at this page's
+     widths the global value left content sitting in a visibly boxed-in
+     column; this scopes a tighter margin to BigID only so sections read
+     closer to the edge, the way the Claude Design Tries row already does. */
+  .page {
+    --gutter: 64px;
+  }
+
+  .pillarGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .shotMeta {
+    flex: 0 0 200px;
+  }
+
+  .screenBlock {
+    flex-direction: row;
+    align-items: center;
+    gap: 64px;
+  }
+
+  .screenMac {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .screenCaption {
+    flex: 0 0 340px;
+  }
+
+  .screenBlockReverse {
+    flex-direction: row-reverse;
+  }
+}

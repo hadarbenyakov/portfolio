@@ -1,69 +1,51 @@
-import Image from "next/image";
+import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
+import HeroImageCarousel from "@/components/HeroImageCarousel/HeroImageCarousel";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import ScrollHint from "@/components/ScrollHint/ScrollHint";
+import { projects } from "@/data/projects";
 import styles from "./page.module.css";
+
+/** A shot pulled from inside each case study, cycled in the hero. */
+const HERO_IMAGES = [
+  { src: "/projects/bigid/screen-overview.png", alt: "BigID" },
+  { src: "/projects/bigid/hero-intro.png", alt: "BigID" },
+  { src: "/projects/cults/god.png", alt: "Inside The Cults" },
+  { src: "/projects/sound/make.png", alt: "Sound Playground" },
+  { src: "/projects/mycora/hero-dashboard.png", alt: "Mycora" },
+  { src: "/projects/mycora/hero-map.png", alt: "Mycora" },
+  { src: "/projects/xchange/hero-card.png", alt: "Xchange" },
+];
 
 export default function Home() {
   return (
-    <div className={styles.page}>
+    <>
+      <Header active="Home" />
+
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
+        <section className={styles.hero}>
+          <HeroImageCarousel images={HERO_IMAGES} />
+
+          <h1 className={styles.title}>
+            <span className={`${styles.line} ${styles.line1}`}>HEY, I&rsquo;M</span>
+            <span className={`${styles.line} ${styles.line2}`}>HADAR</span>
+            <span className={`${styles.line} ${styles.line3}`}>BEN YAAKOV</span>
           </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+          <div className={styles.heroMeta}>
+            <p className={styles.tagline}>PRODUCT DESIGNER BASED IN TEL AVIV</p>
+            <ScrollHint className={styles.scrollHint} />
+          </div>
+        </section>
+
+        <section className={styles.works} id="works">
+          {projects.map((project) => (
+            <ProjectCard key={project.slug} {...project} />
+          ))}
+        </section>
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }

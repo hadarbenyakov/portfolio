@@ -1,0 +1,816 @@
+/* Rebuilt to match the redesigned Figma frame exactly (get_design_context on
+   node 1426:2254, "Desktop", 1280x11616). Colors, copy, spacing and images
+   below are taken directly from that frame — this is not an interpretation.
+   Below the --desktop breakpoint the collage-style hero and the fixed-px
+   sections fall back to a simplified stacked layout, since only the 1280
+   desktop frame was designed. */
+
+.page {
+  --page-bg: #d7d7d4;
+  --ink: #000000;
+  --ink-muted: #6d6d6d;
+  --ink-faint: #818181;
+  --accent: #f75f19;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--font-pjs), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Helvetica, Arial, sans-serif;
+}
+
+/* The three headings + the closing link use Inter in the Figma file while
+   everything else uses Plus Jakarta Sans — kept as designed rather than
+   normalized. */
+.inter {
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bleed {
+  width: 100%;
+}
+
+.content {
+  width: 100%;
+  max-width: 800px;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- hero collage ---------- */
+/* The whole hero is one absolutely-positioned collage at every width, using
+   container query units so it scales as one composition instead of
+   switching to a different (stacked) layout below some breakpoint — a
+   collage read wrong at "tablet-ish" widths is what prompted this rewrite. */
+
+.hero {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  max-width: 1155px;
+  margin: 0 auto;
+  padding: 48px var(--gutter) 0;
+  overflow: hidden;
+}
+
+.heroStack {
+  display: contents;
+}
+
+.heroCollage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1155 / 1117;
+}
+
+.heroCollage > * {
+  position: absolute;
+}
+
+.heroWatermark {
+  top: 0%;
+  left: 3.3%;
+  font-size: clamp(48px, 23.46cqw, 271px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.heroPhoto {
+  top: 15.85%;
+  left: 0;
+  width: 81.4%;
+  aspect-ratio: 1;
+}
+
+.heroPhoto img {
+  object-fit: cover;
+}
+
+.heroTagline {
+  top: 77.35%;
+  left: 0;
+  width: 37.7%;
+  font-size: clamp(18px, 4.16cqw, 48px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.heroBody {
+  top: 68.2%;
+  left: 73.6%;
+  width: 26.4%;
+  font-size: clamp(11px, 2.16cqw, 25px);
+  font-weight: 500;
+  line-height: 1.36;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.heroPills {
+  display: contents;
+}
+
+/* Below tablet the absolutely-positioned collage overlaps and clips (the
+   fixed aspect-ratio box can't grow to fit the wrapped tagline/body text at
+   narrow cqw-driven font sizes) — so mobile gets a simple stacked fallback
+   instead of a scaled-down copy of the 1280 collage. */
+@media (max-width: 767px) {
+  .heroCollage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .heroCollage > * {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100%;
+  }
+
+  .heroWatermark {
+    font-size: clamp(40px, 16vw, 80px);
+  }
+
+  .heroPhoto {
+    aspect-ratio: 1;
+  }
+
+  .heroTagline {
+    font-size: clamp(20px, 6vw, 28px);
+    color: var(--ink);
+  }
+
+  .heroBody {
+    font-size: 15px;
+    color: var(--ink-muted);
+  }
+
+  .heroPills {
+    display: none;
+  }
+}
+
+.pill {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  padding: clamp(4px, 1.5cqw, 8px) clamp(10px, 3.5cqw, 20px);
+  border-radius: 70px;
+  background: rgba(82, 82, 82, 0.1);
+  color: var(--accent);
+  font-size: clamp(10px, 1.56cqw, 18px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+/* ---------- crisis (black) ---------- */
+
+.crisis {
+  /* The app's real "app" surface (#1b1b1b, from the design-system frame) —
+     not pure black, per the request to match the app's own dark gray. */
+  background: #1b1b1b;
+  color: #ffffff;
+}
+
+.crisisInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(90px, 16vw, 200px) var(--gutter);
+  text-align: center;
+}
+
+.crisisTitle {
+  font-size: clamp(40px, 11vw, 96px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: rgba(110, 110, 110, 0.5);
+}
+
+.crisisBody {
+  max-width: 720px;
+  margin: 24px auto 0;
+  font-size: clamp(17px, 3vw, 21px);
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: #b3b3b3;
+}
+
+.crisisBody p + p {
+  margin-top: 16px;
+}
+
+/* ---------- system + HMW (orange) ---------- */
+
+.system {
+  position: relative;
+  background: var(--accent);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.systemInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(56px, 9vw, 96px);
+  padding: clamp(72px, 11vw, 130px) var(--gutter);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.hmw {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 900px;
+  width: 100%;
+  padding: 32px 24px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Decorative blur cluster from Figma ("Group 4") — sits behind the HMW
+   card's right side and bleeds down past it; flattened to one SVG since it's
+   ~14 stacked semi-transparent ellipses in the source. */
+.hmwBlob {
+  display: none;
+  pointer-events: none;
+}
+
+.hmwLabel {
+  font-size: clamp(48px, 9vw, 84px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hmwQuestion {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+.resourceRow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.resourceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 140px;
+}
+
+/* height-driven, width:auto — the source SVGs aren't square (and are
+   authored with preserveAspectRatio="none"), so forcing a square box
+   stretched them badly at the larger desktop size. */
+.resourceIcon {
+  width: auto;
+  height: 64px;
+}
+
+.resourceLabel {
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.swapIcon {
+  width: 32px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.resourcesNote {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  width: 100%;
+  margin: 40px auto 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- shared section furniture (on page bg) ---------- */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(72px, 11vw, 130px) var(--gutter);
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: left;
+  margin-bottom: clamp(48px, 8vw, 80px);
+}
+
+/* ---------- UX research ---------- */
+/* Real Mobbin exports, one app per category that overlaps an Xchange
+   feature. Each row: app icon + name in a fixed left column, screens
+   scrolling alongside on the right — no category label, no copy. */
+
+/* Wider than the standard .section cap — the research strip needs the extra
+   room so more (ideally all) screens in a flow show without scrolling on a
+   wide display. */
+.uxSection {
+  max-width: 2200px;
+}
+
+.uxRows {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+}
+
+.uxRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.uxHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  width: 64px;
+}
+
+.uxLogos {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.uxLogos img {
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.uxAppName {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.uxShotPair {
+  display: flex;
+  gap: 16px;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.uxShot {
+  position: relative;
+  flex: 0 0 auto;
+  width: 140px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.uxShot img {
+  object-fit: cover;
+}
+
+/* ---------- user flow (flowchart) ---------- */
+/* Colors here are the real app palette — #1b1b1b / #262626 / #2a2a2a and the
+   #ff5f1f accent — read straight from the "🎨 Xchange — Design System" Figma
+   frame (get_design_context, node 1246:344), not invented for the diagram. */
+
+.userFlowSection {
+  background: #1b1b1b;
+  color: #ffffff;
+}
+
+.userFlowInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  /* Generously padded on purpose — this is the second black block on the
+     page, sized to still read as spacious on a 16" laptop rather than
+     stretched edge to edge. */
+  padding: clamp(100px, 15vw, 200px) clamp(24px, 9vw, 180px);
+}
+
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.flowGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.flowBox {
+  width: 100%;
+  max-width: 260px;
+  padding: 18px 22px;
+  border-radius: 20px;
+  background: #262626;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.flowBoxTitle {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.flowBoxBody {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #9a9a9a;
+}
+
+/* terminal state — same dark card as the rest, marked only by an accent
+   border, not a full orange fill with a glow. */
+.flowBoxAccent {
+  border-color: var(--accent);
+}
+
+/* down arrow connector */
+.flowArrow {
+  position: relative;
+  width: 2px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.18);
+  margin: 6px 0;
+}
+
+.flowArrow::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid rgba(255, 255, 255, 0.3);
+}
+
+.flowArrowYes {
+  height: 40px;
+  margin-top: 14px;
+}
+
+.flowArrowLabel {
+  position: absolute;
+  top: -4px;
+  left: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* Negotiate → decision, with the loop-back arrow to its right */
+.loopWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-right: 64px;
+}
+
+.diamond {
+  width: 190px;
+  max-width: 100%;
+  aspect-ratio: 5 / 3;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  background: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 26px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.loopSvg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -4px;
+  width: 68px;
+  height: 100%;
+  overflow: visible;
+}
+
+.loopPath {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.loopArrowhead {
+  fill: var(--accent);
+}
+
+.noLabel {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(247, 95, 25, 0.14);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.flowCaption {
+  align-self: center;
+  max-width: 320px;
+  margin: 40px auto 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  color: #9a9a9a;
+}
+
+/* ---------- main flow (phone walkthrough, matches /works/inside-the-cults) ---------- */
+
+.walkthrough {
+  display: flex;
+  flex-direction: column;
+  gap: 88px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.walkStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+.walkPhone {
+  position: relative;
+  width: min(260px, 60vw);
+  aspect-ratio: 876 / 1792;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.walkCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.walkTitle {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink-faint);
+}
+
+.walkBody {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: var(--ink-muted);
+}
+
+/* ---------- closing ---------- */
+
+.closing {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(64px, 10vw, 110px) var(--gutter) clamp(80px, 13vw, 140px);
+  text-align: left;
+}
+
+.closingLink {
+  display: inline-block;
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ================= desktop (Figma reference, 1280) ================= */
+
+@media (--desktop) {
+  .hero {
+    padding-top: 0;
+  }
+
+  .crisisInner {
+    text-align: left;
+    padding-top: clamp(140px, 20vw, 280px);
+    padding-bottom: clamp(140px, 20vw, 280px);
+  }
+
+  .crisisTitle {
+    font-size: 154px;
+    line-height: 1.32;
+    letter-spacing: -0.02em;
+  }
+
+  .crisisBody {
+    margin: 48px 0 0;
+    font-size: 35px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 1009px;
+  }
+
+  .systemInner {
+    align-items: flex-start;
+  }
+
+  .hmw {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 64px;
+    max-width: 1058px;
+    padding: 90px 70px;
+    border-radius: 50px;
+  }
+
+  .hmwBlob {
+    display: block;
+    position: absolute;
+    top: -6.4%;
+    left: 62.7%;
+    width: 97.7%;
+    aspect-ratio: 1033.39 / 1045;
+    z-index: 0;
+  }
+
+  .hmwLabel,
+  .hmwQuestion {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hmwLabel {
+    font-size: 124px;
+  }
+
+  .hmwQuestion {
+    flex: 1;
+    font-size: 24px;
+  }
+
+  .resourceRow {
+    /* Match the HMW card's own box (flush left, 1058px) so the icons center
+       under the card above them instead of under the full, wider section. */
+    max-width: 1058px;
+    gap: 13px;
+    margin-top: 56px;
+  }
+
+  .resourceItem {
+    width: 243px;
+    gap: 0;
+  }
+
+  .resourceIcon {
+    width: auto;
+    height: 163px;
+    margin-bottom: -12px;
+  }
+
+  .resourceLabel {
+    font-size: 24px;
+  }
+
+  .swapIcon {
+    width: 62px;
+    height: 54px;
+  }
+
+  .resourcesNote {
+    margin-top: 56px;
+    font-size: 20px;
+  }
+
+  .uxRow {
+    gap: 32px;
+  }
+
+  .uxHeader {
+    width: 80px;
+  }
+
+  .uxLogos {
+    width: 56px;
+    height: 56px;
+  }
+
+  .uxAppName {
+    font-size: 13px;
+  }
+
+  .uxShot {
+    width: 180px;
+  }
+
+  .walkStep {
+    flex-direction: row;
+    justify-content: center;
+    gap: 76px;
+  }
+
+  .walkPhone {
+    width: 260px;
+  }
+}

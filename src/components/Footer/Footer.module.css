@@ -1,0 +1,90 @@
+.footer {
+  padding: 40px var(--gutter) 0;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 64px 0;
+  border-top: 1px solid var(--color-divider);
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.link {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+.underlined {
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.link:hover {
+  color: var(--color-fg);
+}
+
+@media (--tablet) {
+  .footer {
+    padding: 64px 80px 0;
+  }
+
+  .inner {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
+    padding: 96px 0;
+  }
+
+  .links {
+    flex-direction: row;
+    align-items: center;
+    gap: 124px;
+  }
+}
+
+@media (--desktop) {
+  .footer {
+    padding: 80px var(--gutter) 0;
+  }
+
+  .inner {
+    padding: 90px 0;
+  }
+}
+
+/* About lays the row out without the rule and at its own rhythm */
+.footerFlush {
+  padding-top: 0;
+}
+
+.innerFlush {
+  border-top: 0;
+}
+
+@media (--tablet) {
+  .innerFlush {
+    padding: 90px 0;
+  }
+
+  .innerFlush .links {
+    gap: clamp(32px, 9.7vw, 124px);
+  }
+}

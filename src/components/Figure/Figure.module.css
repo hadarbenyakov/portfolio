@@ -1,0 +1,26 @@
+.figure {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Shown until the Figma export is dropped into /public. Sized to the exact
+   Figma aspect ratio so swapping in the real asset cannot shift the layout. */
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: var(--color-surface-subtle);
+  border: 1px dashed var(--color-divider);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-fg-muted);
+}

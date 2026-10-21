@@ -1,0 +1,627 @@
+/* Every value below is read from Figma via get_design_context on the /mycora
+   frames (desktop 1280 / tablet 800 / mobile 392). Desktop is the reference;
+   the smaller breakpoints relax the fixed Figma widths into fluid ones. */
+
+.page {
+  --content: 1280px;
+  --slot-bg: var(--green-mid);
+  --slot-border: rgba(24, 35, 16, 0.25);
+  --slot-fg: var(--ink-muted);
+}
+
+.main {
+  margin: 0 auto;
+  max-width: var(--content);
+}
+
+/* ---------- hero ---------- */
+
+.heroTitle {
+  padding: 40px var(--gutter);
+  font-size: 70px;
+  font-weight: 800;
+  line-height: normal;
+  color: var(--green-dark);
+  text-align: center;
+}
+
+.heroMedia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 54px;
+  padding: 0 var(--gutter);
+}
+
+.heroMac {
+  width: 100%;
+  max-width: 727px;
+}
+
+.heroPhone {
+  position: relative;
+  width: min(233px, 100%);
+  aspect-ratio: 233 / 450.531;
+  flex-shrink: 0;
+}
+
+.heroPhoneImage {
+  object-fit: cover;
+}
+
+.tagline {
+  padding: 50px var(--gutter);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--color-fg-muted);
+  text-align: center;
+}
+
+/* ---------- shared section furniture ---------- */
+
+.section {
+  padding: 80px var(--gutter);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 695px;
+}
+
+.introCentered {
+  max-width: 709px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--green-dark);
+}
+
+.eyebrowBold {
+  font-weight: 700;
+  line-height: normal;
+}
+
+.lede {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+/* Stacked "Orchard Owner / sketches" label */
+.roleHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  color: var(--green-ink);
+  text-align: center;
+}
+
+.roleName {
+  padding-top: 8px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.roleKind {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* ---------- research lifecycle ---------- */
+
+.research {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  padding: 80px var(--gutter) 96px;
+}
+
+.lifecycle {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px 31px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: center;
+}
+
+.stepImage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 202 / 126;
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.stepImage img {
+  object-fit: cover;
+}
+
+.stepText {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stepTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--green-ink);
+}
+
+.stepBody {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--ink-muted);
+}
+
+/* ---------- focus area diagram ---------- */
+
+.focus {
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  padding: 90px var(--gutter);
+}
+
+.diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.persona {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.personaImage {
+  position: relative;
+  width: 100%;
+  max-width: 323px;
+  aspect-ratio: 323 / 200;
+  border-radius: 29.419px;
+  overflow: hidden;
+  box-shadow: 0 4.903px 10.909px 0 rgba(0, 0, 0, 0.1);
+}
+
+.personaImage img {
+  object-fit: cover;
+}
+
+.personaName {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--green-muted);
+  text-align: center;
+}
+
+.frictionCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(299px, 100%);
+  min-height: 216px;
+  padding: 34.322px;
+  border-radius: 26.967px;
+  background: var(--green-mid);
+  color: var(--green-ink);
+  text-align: center;
+}
+
+.frictionInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35.547px;
+  width: min(162px, 100%);
+}
+
+.frictionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+  opacity: 0.83;
+}
+
+.frictionList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.frictionList p {
+  opacity: 0.69;
+}
+
+.diagramArrow {
+  display: none;
+}
+
+/* ---------- HMW statement ---------- */
+
+.statement {
+  padding: clamp(80px, 14vw, 140px) var(--gutter);
+  text-align: center;
+}
+
+.statementText {
+  margin: 0 auto;
+  max-width: 894px;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--green-dark);
+}
+
+/* ---------- UX research ---------- */
+
+.uxResearch {
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+  padding: 80px var(--gutter);
+}
+
+.uxRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.uxLogo {
+  position: relative;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.uxLogo img {
+  object-fit: cover;
+}
+
+/* The screenshots are crops of a wider capture; the inner offsets reproduce
+   Figma's crop rather than re-cropping the source files. */
+.uxShot {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Shared crop primitive: an oversized inner box positioned by Figma's own
+   percentages, so the exported asset is never re-cropped. */
+.crop,
+.uxShot {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cropInner {
+  position: absolute;
+  max-width: none;
+}
+
+.cropInner img {
+  object-fit: fill;
+}
+
+.rotateWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rotateWrap > * {
+  flex: none;
+  transform: rotate(-90deg);
+}
+
+/* ---------- sketches ---------- */
+
+.sketches {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 80px var(--gutter);
+}
+
+.sketchRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.featureRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 25px;
+  text-align: center;
+}
+
+.featureTitle {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--green-ink);
+}
+
+.featureTitleLarge {
+  font-size: 22px;
+}
+
+.featureBody {
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--ink-muted);
+}
+
+.featureBodyLight {
+  font-weight: 300;
+}
+
+/* ---------- screens ---------- */
+
+.screens {
+  display: flex;
+  flex-direction: column;
+  gap: 88px;
+  padding: 80px var(--gutter);
+}
+
+.screenBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+.screenStack {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+}
+
+.screenCaption {
+  text-align: center;
+}
+
+.phoneRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  justify-items: center;
+}
+
+.phone {
+  position: relative;
+  width: 100%;
+  max-width: 266px;
+  aspect-ratio: 266 / 496;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.prototypeLink {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.3;
+  color: var(--green-dark);
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ================= tablet ================= */
+
+@media (--tablet) {
+  .lifecycle {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .featureRow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .phoneRow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .statementText {
+    font-size: 48px;
+  }
+
+  .heroTitle {
+    font-size: 70px;
+  }
+
+  .prototypeLink {
+    font-size: 36px;
+  }
+}
+
+/* ================= desktop (Figma reference) ================= */
+
+@media (--desktop) {
+  .heroTitle {
+    padding: 40px clamp(24px, 18.75vw, 240px);
+    font-size: 77px;
+  }
+
+  .heroMedia {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .heroMac {
+    width: min(727px, 100%);
+  }
+
+  .research {
+    padding: 80px 0 96px;
+    align-items: center;
+  }
+
+  .intro {
+    padding-top: 33px;
+    width: 695px;
+  }
+
+  .lifecycle {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 31px;
+    width: min(1199px, 100%);
+  }
+
+  .focus {
+    padding: 90px 0;
+  }
+
+  /* Figma overlaps the three columns with -91.71px margins and runs the arrow
+     under the centre card. */
+  .diagram {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .diagramColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40.45px;
+    flex-shrink: 0;
+  }
+
+  .diagramColumn:not(:last-child) {
+    margin-right: -91.71px;
+  }
+
+  .diagramSide {
+    width: 503.071px;
+  }
+
+  .diagramCentre {
+    width: 432.075px;
+    gap: 40.51px;
+  }
+
+  .diagramArrow {
+    display: block;
+    width: 432.075px;
+    height: 36.11px;
+    background: url("/projects/mycora/focus-arrow.svg") no-repeat center / 100% 100%;
+  }
+
+  .statement {
+    padding: 293px 0;
+  }
+
+  .statementText {
+    font-size: 59px;
+    line-height: 74px;
+  }
+
+  .uxResearch {
+    gap: 70px;
+    padding: 80px 160px;
+  }
+
+  .uxIntro {
+    padding: 0 120px;
+  }
+
+  .sketches {
+    padding: 80px 0;
+    align-items: center;
+  }
+
+  .sketchRow,
+  .featureRow {
+    width: min(1028px, 100%);
+  }
+
+  .sketchRow {
+    justify-content: center;
+    gap: 47px;
+    overflow-x: visible;
+  }
+
+  .sketchRowWide {
+    gap: 48px;
+  }
+
+  .featureRow {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    align-items: flex-start;
+  }
+
+  .screens {
+    padding: 80px 0;
+    gap: 116px;
+    align-items: center;
+  }
+
+  .screenStack {
+    gap: 154px;
+    width: min(819.699px, 100%);
+  }
+
+  .phoneRow {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .phoneRow > *:not(:last-child) {
+    margin-right: -19px;
+  }
+
+  .prototypeLink {
+    font-size: 47px;
+    line-height: 74px;
+  }
+}

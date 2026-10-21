@@ -1,0 +1,23 @@
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  width: 100%;
+  height: 100%;
+  background: var(--slot-bg, var(--color-surface-subtle));
+  border: 1px dashed var(--slot-border, var(--color-divider));
+  color: var(--slot-fg, var(--color-fg-muted));
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}

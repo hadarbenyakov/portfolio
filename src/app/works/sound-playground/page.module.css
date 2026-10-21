@@ -1,0 +1,167 @@
+/* Every value is read from Figma via get_design_context on the
+   /sound-playground desktop frame (1398:270). This project is dark, so the
+   page re-points the global colour tokens instead of restyling each component
+   — Header, ProjectNav and Footer all inherit the new values. */
+
+.page {
+  --color-bg: #000000;
+  --color-fg: #ffffff;
+  --color-fg-muted: rgba(255, 255, 255, 0.55);
+  --color-surface-subtle: rgba(255, 252, 252, 0.25);
+  --color-divider: rgba(255, 255, 255, 0.15);
+  --nav-bg: #403f3f;
+
+  --subnav-bg: #000000;
+  --arrow-prev: url("/projects/sound/arrow-prev.svg");
+  --arrow-next: url("/projects/sound/arrow-next.svg");
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+.main {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 clamp(var(--gutter), 5vw, 64px) clamp(48px, 8vw, 100px);
+}
+
+.deviceFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1152 / 705;
+  border-radius: clamp(16px, 2.5vw, 32px);
+  overflow: hidden;
+  box-shadow:
+    0 0 4.4px 0 rgba(0, 0, 0, 0.06),
+    0 5px 19px 0 rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  max-width: 740px;
+  font-size: clamp(32px, 6.4vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.subtitle {
+  max-width: 641px;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* ---------- prose ---------- */
+
+.textBlock {
+  padding: clamp(48px, 6.3vw, 80px) var(--gutter);
+}
+
+/* Blocks after the first only pad the bottom — the image above supplies the gap */
+.textBlockTight {
+  padding: 0 var(--gutter) clamp(48px, 7vw, 90px);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* 1280 frame less Figma's 280px gutters */
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.body {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+/* ---------- full-width stills ---------- */
+
+.figure {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.figure img {
+  object-fit: cover;
+}
+
+/* ---------- showcase recording ---------- */
+
+.showcase {
+  position: relative;
+  width: calc(100% - 2 * var(--gutter));
+  max-width: 1120px;
+  margin: 0 auto;
+  aspect-ratio: 1120 / 697;
+  overflow: hidden;
+}
+
+/* ---------- closing ---------- */
+
+.quote {
+  padding: clamp(48px, 6.3vw, 80px) var(--gutter);
+}
+
+.quoteText {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: clamp(24px, 4.8vw, 48px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.cta {
+  display: flex;
+  justify-content: center;
+  padding: clamp(48px, 6.3vw, 80px) var(--gutter);
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #000000;
+  font: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-decoration: underline;
+  text-underline-position: from-font;
+  cursor: pointer;
+}

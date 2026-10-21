@@ -1,0 +1,78 @@
+/* Layer insets come straight from Figma's Macbook Pro mockup component, so the
+   chrome stays aligned at any width. The chrome is decorative, so it is painted
+   as backgrounds rather than <img> elements. */
+.mockup {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 727 / 428;
+}
+
+.mockup::before,
+.chrome > span {
+  content: "";
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.chrome {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Shadow sits below the body and bleeds past both edges */
+.mockup::before {
+  inset: 100% -1.5% auto;
+  height: 2.2%;
+  background-image: url("/projects/mycora/mac-shadow.svg");
+}
+
+.screenFrame {
+  inset: 0 8.11% 2.98%;
+  background-image: url("/projects/mycora/mac-frame.svg");
+}
+
+.deviceBody {
+  inset: 94.72% 0 0;
+  background-image: url("/projects/mycora/mac-body.svg");
+}
+
+.deviceBottom {
+  inset: 97.94% 0 0;
+  background-image: url("/projects/mycora/mac-bottom.svg");
+  mix-blend-mode: multiply;
+}
+
+.bevelLight {
+  inset: 94.72% 42.7% 3.44%;
+  background-image: url("/projects/mycora/mac-bevel-1.svg");
+  mix-blend-mode: hard-light;
+}
+
+.bevelMultiply {
+  inset: 94.72% 42.7% 3.44%;
+  background-image: url("/projects/mycora/mac-bevel-2.svg");
+  mix-blend-mode: multiply;
+}
+
+.screen {
+  position: absolute;
+  inset: 5.05% 10% 10.09%;
+  overflow: hidden;
+  border-radius: 1.108px;
+  /* Sub-pixel rounding on the percentage inset can leave a hairline gap
+     against the chrome below at some render widths — a black fallback
+     here keeps that gap reading as bezel instead of the page's white. */
+  background: #000;
+}
+
+.screenImage {
+  object-fit: cover;
+}
+
+.displayBottom {
+  position: absolute;
+  inset: 91.74% 8.11% 5.28%;
+  background: #1b1b1b;
+}

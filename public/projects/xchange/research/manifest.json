@@ -1,0 +1,42 @@
+{
+  "banking": {
+    "name": "Revolut: send, spend, and save",
+    "icon": "research/banking-icon.jpg",
+    "shots": [
+      "research/banking-1.jpg",
+      "research/banking-2.jpg"
+    ]
+  },
+  "negotiation": {
+    "name": "OfferUp Buy & Sell Marketplace",
+    "icon": "research/negotiation-icon.jpg",
+    "shots": [
+      "research/negotiation-1.jpg",
+      "research/negotiation-2.jpg"
+    ]
+  },
+  "bidding": {
+    "name": "eBay online shopping & selling",
+    "icon": "research/bidding-icon.jpg",
+    "shots": [
+      "research/bidding-1.png",
+      "research/bidding-2.png"
+    ]
+  },
+  "social": {
+    "name": "BeReal: Photos & Friends Daily",
+    "icon": "research/social-icon.jpg",
+    "shots": [
+      "research/social-1.png",
+      "research/social-2.png"
+    ]
+  },
+  "navigation": {
+    "name": "Waze Navigation & Live Traffic",
+    "icon": "research/navigation-icon.jpg",
+    "shots": [
+      "research/navigation-1.jpg",
+      "research/navigation-2.jpg"
+    ]
+  }
+}

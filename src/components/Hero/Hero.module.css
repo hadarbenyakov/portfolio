@@ -1,0 +1,37 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 49px 24px 56px;
+}
+
+.title {
+  max-width: 240px;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+  text-align: center;
+  text-wrap: balance;
+}
+
+@media (--tablet) {
+  .hero {
+    padding: 96px 64px 64px;
+  }
+
+  .title {
+    max-width: 557px;
+    font-size: 56px;
+  }
+}
+
+@media (--desktop) {
+  .hero {
+    padding: 120px;
+  }
+
+  .title {
+    max-width: 578px;
+    font-size: 64px;
+  }
+}

@@ -1,150 +1,166 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
-}
+/* Read from Figma via get_design_context on the new home frame (1398:231),
+   drawn at 1512 (MacBook Pro 14"). Percentages below are that frame's
+   measurements divided by 1512, so the composition scales as one piece. */
 
 .main {
+  margin: 0 auto;
+  max-width: 1512px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  padding: min(12.3vw, 186px) var(--gutter) min(18.4vw, 278px);
+}
+
+/* Below tablet, the desktop frame's wide margin offsets push nowrap lines
+   past the viewport edge — so mobile gets its own centred, wrapping
+   composition instead of a scaled-down copy of the 1512 frame. */
+.title {
+  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: min(15vw, 194px);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-fg);
+  text-align: center;
+}
+
+.line {
+  display: block;
+}
+
+.heroMeta {
+  position: relative;
   display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
-}
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.tagline,
+.scrollHint {
+  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+  text-align: center;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.tagline {
+  margin-top: 16px;
+  font-weight: 300;
+  font-size: clamp(14px, 4vw, 34px);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
+@media (--tablet) {
+  .title {
+    /* 194px at the 1512 frame width */
+    font-size: min(12.83vw, 194px);
+    /* Figma stacks the three lines 148px apart at 194px type */
+    line-height: 0.763;
+    text-align: left;
   }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-}
-
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+  .line {
+    width: fit-content;
+    white-space: nowrap;
   }
 
-  .intro {
-    gap: 16px;
+  /* Each line is nudged so its centre lands on the point Figma gives it,
+     solved against the line's own rendered width (margin-left is a % of
+     the content box, i.e. frame width minus the gutter on both sides) */
+  .line1 {
+    margin-left: 9.43%;
   }
 
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+  .line2 {
+    margin-left: 30.61%;
   }
 
-  .page {
-    --background: #000;
-    --foreground: #000;
+  .line3 {
+    margin-left: 14.29%;
+  }
 
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+  /* 34px at the 1512 frame width, Clash Grotesk Light.
+     Sits right under the title, snug against it — and starts at the
+     same x as "HADAR" (line2 shares its margin-left). */
+  .tagline {
+    align-self: flex-start;
+    width: fit-content;
+    margin: calc(min(1.5vw, 24px) - 27px) 0 0 30.61%;
+    font-size: clamp(14px, 2.25vw, 34px);
   }
 }
 
-.code {
-  font-family: var(--font-geist-mono);
-  font-size: 0.9em;
-  background: color-mix(in srgb, currentColor 8%, transparent);
-  padding: 0.1em 0.4em;
-  border-radius: 6px;
+/* Pinned to the bottom of the viewport so it's visible the moment you
+   land on the page, with a gentle up/down float to draw the eye. */
+.scrollHint {
+  position: fixed;
+  left: 50%;
+  bottom: min(4vw, 40px);
+  z-index: 5;
+  transform: translateX(-50%);
+  font-weight: 400;
+  font-size: clamp(12px, 1.6vw, 24px);
+  animation: scrollHintFloat 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollHintFloat {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHint {
+    animation: none;
+  }
+}
+
+/* ---------- work grid ---------- */
+/* Breaks out of .main's 1512px cap (left:50% + translateX trick) so cards
+   can keep growing on very large screens instead of staying capped at the
+   Figma frame width — mobile gets a slightly tighter inset to read smaller. */
+
+.works {
+  position: relative;
+  left: 50%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  width: 100vw;
+  max-width: 1760px;
+  margin-left: -50vw;
+  padding: 0 calc(var(--gutter) + 12px) 80px;
+}
+
+@media (--tablet) {
+  .works {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: min(7.1vw, 108px);
+    row-gap: min(7.9vw, 119px);
+    padding: 0 var(--gutter) 80px;
+  }
+}
+
+@media (--desktop) {
+  .hero {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+
+  .works {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .works {
+    max-width: 1920px;
+  }
 }

@@ -1,0 +1,389 @@
+/* Every value here is read from Figma via get_design_context on the
+   /inside-the-cults desktop frame (1396:8). */
+
+.page {
+  --accent: red; /* headings and links use Figma's pure red */
+  --ink-dark: #0e0e12;
+  --subnav-bg: var(--accent);
+  /* Fades the floating Home/Works/About pill to a faint 10% tint instead of
+     its usual solid light-gray fill. */
+  --nav-bg: color-mix(in srgb, #f2f2f2 10%, transparent);
+  --slot-bg: rgba(0, 0, 0, 0.05);
+  --slot-border: rgba(0, 0, 0, 0.15);
+  --slot-fg: var(--color-fg-muted);
+}
+
+/* The red runs all the way to the very top edge of the page, behind the
+   wordmark/contact row and the prev-next arrows, not just behind the hero. */
+.topBar {
+  background: var(--accent);
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+/* ---------- hero ---------- */
+
+.bleed {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 var(--gutter) clamp(64px, 12.5vw, 160px);
+  background: var(--accent);
+}
+
+.heroInner,
+.automationInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: inherit;
+  width: 100%;
+  max-width: 1280px;
+}
+
+.heroHeading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 800px;
+  text-align: center;
+}
+
+.title {
+  font-size: clamp(32px, 6.4vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+}
+
+.tagline {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+.heroMedia {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 798 / 492;
+  position: relative;
+  overflow: hidden;
+}
+
+.prototypeLink {
+  font-size: clamp(24px, 3.8vw, 38px);
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-decoration: underline;
+  text-underline-position: from-font;
+  text-align: center;
+}
+
+/* ---------- prose ---------- */
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 168px;
+  margin: 0 auto;
+  max-width: 779px;
+  padding: 70px var(--gutter);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+.body {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+/* ---------- research screenshots ---------- */
+
+.researchShots {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  justify-items: center;
+  padding: clamp(48px, 9vw, 110px) var(--gutter);
+}
+
+@media (--tablet) {
+  .researchShots {
+    /* Figma butts the three captures together at their own widths; the ratios
+       are preserved as grid fractions so they scale as one strip. */
+    display: flex;
+    gap: 0;
+    align-items: flex-start;
+  }
+}
+
+.shot {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.cropInner {
+  position: absolute;
+  max-width: none;
+}
+
+.cropInner img {
+  object-fit: fill;
+}
+
+/* ---------- visual language ---------- */
+
+.visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: clamp(48px, 8vw, 100px) var(--gutter) 40px;
+}
+
+.visualIntro {
+  max-width: 800px;
+  width: 100%;
+}
+
+.portraits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(16px, 4.5vw, 57px);
+}
+
+.portrait {
+  position: relative;
+  width: clamp(132px, 22vw, 280px);
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.portraitPhoto {
+  object-fit: cover;
+}
+
+.portraitSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* Slower than the hover-in transition below, so the photo fades back
+     in gently once the cursor leaves. */
+  transition: opacity 1.1s ease;
+}
+
+.portrait:hover .portraitSvg {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.overview {
+  position: relative;
+  width: 100%;
+  max-width: 992px;
+  aspect-ratio: 992 / 616;
+  overflow: hidden;
+}
+
+/* ---------- statement ---------- */
+
+.statement {
+  padding: clamp(80px, 17vw, 220px) var(--gutter);
+  text-align: center;
+}
+
+.statementText {
+  margin: 0 auto;
+  max-width: 768px;
+  font-size: clamp(28px, 5.9vw, 59px);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+/* ---------- phone walkthrough ---------- */
+
+.walkthrough {
+  display: flex;
+  flex-direction: column;
+  gap: 83px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 var(--gutter);
+}
+
+.walkStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.walkPhone {
+  position: relative;
+  width: min(331px, 100%);
+  max-width: 100%;
+  aspect-ratio: 331 / 576;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.walkCaption {
+  width: 292px;
+  max-width: 100%;
+}
+
+.walkTitle {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.walkBody {
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--color-fg-muted);
+}
+
+.diveIn {
+  display: block;
+  padding: clamp(48px, 7vw, 80px) var(--gutter);
+  font-size: clamp(28px, 4.7vw, 47px);
+  font-weight: 900;
+  line-height: 1.3;
+  color: var(--accent);
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+/* ---------- automation note ---------- */
+
+.automation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px var(--gutter) 20px;
+  background: var(--ink-dark);
+  color: #ffffff;
+}
+
+.automationInner {
+  gap: 0;
+}
+
+.automationIntro {
+  width: 100%;
+  max-width: 800px;
+  padding-top: 100px;
+  /* Figma pulls the screenshot up under the copy */
+  margin-bottom: -34px;
+}
+
+.automationHeading {
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* The dark panel overrides the page-level muted body colour */
+.automationBody {
+  color: #ffffff;
+}
+
+.automationShot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2828 / 1482;
+  overflow: hidden;
+}
+
+.automationShot img {
+  object-fit: cover;
+}
+
+@media (--tablet) {
+  .walkStep {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 76px;
+  }
+}
+
+@media (--desktop) {
+  .statementText {
+    line-height: 74px;
+  }
+
+  .diveIn {
+    line-height: 74px;
+  }
+
+  .hero {
+    padding: 0 0 160px;
+  }
+
+  .prose,
+  .walkthrough {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .researchShots,
+  .visual,
+  .statement,
+  .diveIn {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .automation {
+    padding-left: clamp(24px, 8.6vw, 110px);
+    padding-right: clamp(24px, 8.6vw, 110px);
+  }
+
+  .researchShots {
+    padding-top: 110px;
+    padding-bottom: 110px;
+  }
+}

@@ -1,3 +1,4 @@
-/* Placeholder values - will be replaced with real Figma frame widths in Phase 1.2 */
+/* Real Figma frame widths: Mobile 375 / Tablet 800 / Desktop 1280.
+   Breakpoints sit just below each frame so a frame renders at its design width. */
 @custom-media --tablet (min-width: 768px);
-@custom-media --desktop (min-width: 1440px);
+@custom-media --desktop (min-width: 1280px);
