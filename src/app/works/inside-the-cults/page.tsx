@@ -124,10 +124,10 @@ export default function InsideTheCultsPage() {
           </div>
         </section>
 
-        <section className={`${styles.researchShots} reveal`}>
+        <section className={styles.researchShots}>
           {RESEARCH_SHOTS.map(({ src, w, h, crop }, i) => (
             <div
-              className={styles.shot}
+              className={`${styles.shot} ${i % 2 === 0 ? "reveal-left" : "reveal-right"}`}
               key={src}
               style={{ flex: `${w} 1 0`, aspectRatio: `${w} / ${h}` }}
             >
