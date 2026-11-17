@@ -78,7 +78,7 @@ export default function InsideTheCultsPage() {
         <section className={`${styles.hero} ${styles.bleed}`}>
           <div className={styles.heroInner}>
             <div className={styles.heroHeading}>
-              <h1 className={styles.title}>Inside The Cults</h1>
+              <h1 className={`${styles.title} hero-title-in`}>Inside The Cults</h1>
               <p className={styles.tagline}>
                 An experiential platform that invites users to dive into the
                 hidden world of cults.
@@ -114,7 +114,7 @@ export default function InsideTheCultsPage() {
           </p>
 
           <div className={styles.block}>
-            <h2 className={styles.heading}>Research</h2>
+            <h2 className={`${styles.heading} reveal-heading`}>Research</h2>
             <p className={styles.body}>
               I began this project with in-depth research into cults, exploring
               a wide range of types and structures. As I read and analyzed
@@ -153,7 +153,7 @@ export default function InsideTheCultsPage() {
 
         <section className={`${styles.visual} reveal`}>
           <div className={`${styles.block} ${styles.visualIntro}`}>
-            <h2 className={styles.heading}>Visual Language</h2>
+            <h2 className={`${styles.heading} reveal-heading`}>Visual Language</h2>
             <p className={styles.body}>
               The visual language is built around pixelation as both a graphic
               system and a conceptual framework. By deconstructing portraits of
@@ -230,7 +230,7 @@ export default function InsideTheCultsPage() {
         <section className={`${styles.automation} ${styles.bleed} reveal`}>
           <div className={styles.automationInner}>
             <div className={`${styles.block} ${styles.automationIntro}`}>
-              <h2 className={styles.automationHeading}>Can I Just AI This?</h2>
+              <h2 className={`${styles.automationHeading} reveal-heading`}>Can I Just AI This?</h2>
               <div className={`${styles.body} ${styles.automationBody}`}>
                 <p>
                   As I built the site, I felt there was one task that come back

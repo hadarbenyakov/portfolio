@@ -9,6 +9,9 @@ import styles from "./page.module.css";
 
 const A = "/projects/bigid";
 
+/** Cycles the global reveal-N stagger delays across a mapped list. */
+const REVEAL_STAGGER = ["", "reveal-1", "reveal-2"];
+
 export const metadata: Metadata = {
   title: "BigID — Hadar Ben Yaakov",
   description:
@@ -180,7 +183,7 @@ export default function BigIdPage() {
 
           <div className={styles.heroText}>
             <p className={styles.heroBadge}>Real product · Built in code</p>
-            <h1 className={styles.heroTitle}>
+            <h1 className={`${styles.heroTitle} hero-title-in`}>
               Design System Analytics for BigID
             </h1>
             <p className={styles.heroTagline}>
@@ -218,7 +221,7 @@ export default function BigIdPage() {
         {/* ---------- problem ---------- */}
         <section className={`${styles.section} ${styles.problemSection} reveal`}>
           <div className={styles.problemIntro}>
-            <h2 className={styles.problemTitle}>The Problem</h2>
+            <h2 className={`${styles.problemTitle} reveal-heading`}>The Problem</h2>
             <p className={styles.problemLede}>
               BigID has more than one design system, depending on where you
               look. There&rsquo;s the one in Figma, which designers work
@@ -239,7 +242,7 @@ export default function BigIdPage() {
         {/* ---------- HMW (its own full beat) ---------- */}
         <section className={`${styles.section} ${styles.statementSection} reveal`}>
           <div className={styles.statement}>
-            <p className={styles.statementHmw}>HMW</p>
+            <p className={`${styles.statementHmw} reveal-heading`}>HMW</p>
             <p className={styles.statementText}>
               give BigID teams real visibility into how their components
               are actually built, used, and trusted once they leave Figma?
@@ -250,7 +253,7 @@ export default function BigIdPage() {
         {/* ---------- research ---------- */}
         <section className={`${styles.section} reveal`}>
           <div className={styles.intro}>
-            <h2 className={styles.eyebrowDark}>Research</h2>
+            <h2 className={`${styles.eyebrowDark} reveal-heading`}>Research</h2>
             <p className={styles.lede}>
               Before building anything new, I mapped how teams who&rsquo;d
               already solved pieces of this problem were doing it, from
@@ -291,7 +294,7 @@ export default function BigIdPage() {
         {/* ---------- framework ---------- */}
         <section className={`${styles.section} reveal`}>
           <div className={styles.intro}>
-            <h2 className={styles.eyebrowDark}>The Framework</h2>
+            <h2 className={`${styles.eyebrowDark} reveal-heading`}>The Framework</h2>
             <p className={styles.lede}>
               Every screen in DS Analytics answers one question. Together
               they&rsquo;re the full health check, from whether anyone&rsquo;s
@@ -300,10 +303,13 @@ export default function BigIdPage() {
           </div>
 
           <div className={styles.pillarGrid}>
-            {PILLARS.map(({ num, title, question, body, metrics }) => (
-              <div className={styles.pillarCard} key={title}>
+            {PILLARS.map(({ num, title, question, body, metrics }, i) => (
+              <div
+                className={`${styles.pillarCard} ${REVEAL_STAGGER[i % REVEAL_STAGGER.length]}`}
+                key={title}
+              >
                 <span className={styles.pillarNum}>{num}</span>
-                <h3 className={styles.pillarTitle}>{title}</h3>
+                <h3 className={`${styles.pillarTitle} reveal-heading`}>{title}</h3>
                 <p className={styles.pillarQuestion}>{question}</p>
                 <p className={styles.pillarBody}>{body}</p>
                 <ul className={styles.pillarMetrics}>
@@ -319,7 +325,7 @@ export default function BigIdPage() {
         {/* ---------- claude design tries (bleed) ---------- */}
         <section className={`${styles.bleed} ${styles.claudeTries} reveal`}>
           <div className={styles.claudeTriesInner}>
-            <h2 className={styles.claudeTriesTitle}>
+            <h2 className={`${styles.claudeTriesTitle} reveal-heading`}>
               Claude&rsquo;s First Crack at Adoption
             </h2>
 
@@ -346,7 +352,7 @@ export default function BigIdPage() {
         {/* ---------- product screens ---------- */}
         <section className={`${styles.section} reveal`}>
           <div className={styles.intro}>
-            <h2 className={styles.eyebrowDark}>Inside the Dashboard</h2>
+            <h2 className={`${styles.eyebrowDark} reveal-heading`}>Inside the Dashboard</h2>
           </div>
 
           <div className={styles.screenBlock}>
@@ -356,7 +362,7 @@ export default function BigIdPage() {
               src={`${A}/screen-adoption.png`}
             />
             <div className={styles.screenCaption}>
-              <h3 className={styles.screenTitle}>Adoption Rate</h3>
+              <h3 className={`${styles.screenTitle} reveal-heading`}>Adoption Rate</h3>
               <p className={styles.screenBody}>
                 The front door: a trend line for adoption over time, a split
                 between design-system and custom components, and a
@@ -373,7 +379,7 @@ export default function BigIdPage() {
               src={`${A}/screen-usage-quality.png`}
             />
             <div className={styles.screenCaption}>
-              <h3 className={styles.screenTitle}>Usage Quality</h3>
+              <h3 className={`${styles.screenTitle} reveal-heading`}>Usage Quality</h3>
               <p className={styles.screenBody}>
                 Catches the failures that still pass code review:
                 components that technically ship the right name but
@@ -390,7 +396,7 @@ export default function BigIdPage() {
               src={`${A}/screen-design-consistency.png`}
             />
             <div className={styles.screenCaption}>
-              <h3 className={styles.screenTitle}>Design Consistency</h3>
+              <h3 className={`${styles.screenTitle} reveal-heading`}>Design Consistency</h3>
               <p className={styles.screenBody}>
                 Storybook is where the names actually drift. The same
                 component Figma and the code both call &ldquo;Dialog&rdquo;
@@ -407,7 +413,7 @@ export default function BigIdPage() {
               src={`${A}/screen-satisfaction-trust.png`}
             />
             <div className={styles.screenCaption}>
-              <h3 className={styles.screenTitle}>Satisfaction &amp; Trust</h3>
+              <h3 className={`${styles.screenTitle} reveal-heading`}>Satisfaction &amp; Trust</h3>
               <p className={styles.screenBody}>
                 Turns raw developer complaints into a queue the
                 design-system team can act on, and right now the loudest

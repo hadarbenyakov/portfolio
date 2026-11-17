@@ -50,6 +50,7 @@
 }
 
 .title {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   max-width: 740px;
   font-size: clamp(32px, 6.4vw, 64px);
   font-weight: 700;
@@ -88,6 +89,7 @@
 }
 
 .heading {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
@@ -125,6 +127,32 @@
   overflow: hidden;
 }
 
+/* Signature entrance for this project: a bouncy "beat drop" pop rather
+   than a plain fade, fitting a playful audio-visual toy. */
+@media (prefers-reduced-motion: no-preference) {
+  .figure,
+  .showcase {
+    animation-name: soundPopIn;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@keyframes soundPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
 /* ---------- closing ---------- */
 
 .quote {
@@ -132,6 +160,7 @@
 }
 
 .quoteText {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   max-width: 800px;
   margin: 0 auto;
   font-size: clamp(24px, 4.8vw, 48px);
@@ -164,4 +193,14 @@
   text-decoration: underline;
   text-underline-position: from-font;
   cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+.ctaButton:hover {
+  transform: scale(1.03);
+}
+
+.ctaButton:active {
+  transform: scale(0.98);
+  transition-duration: 80ms;
 }

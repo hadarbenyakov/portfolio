@@ -1,21 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import DeviceVideo from "@/components/DeviceVideo/DeviceVideo";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import ProjectNav from "@/components/ProjectNav/ProjectNav";
 import styles from "./page.module.css";
-
-/* The app runs on Plus Jakarta Sans; three section labels and the closing
-   link use Inter instead — both exactly as authored in Figma (get_design_context
-   on node 1426:2254, "Desktop"). Loaded locally to this page so the rest of
-   the site keeps its own type. */
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-pjs",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
 
 const A = "/projects/xchange";
 
@@ -163,7 +152,7 @@ function pillStyle(left: number, top: number) {
 
 export default function XchangePage() {
   return (
-    <div className={`${styles.page} ${plusJakarta.variable}`}>
+    <div className={styles.page}>
       <Header active="Works" />
 
       <ProjectNav slug="xchange" />
@@ -173,7 +162,7 @@ export default function XchangePage() {
         <section className={styles.hero}>
           <div className={styles.heroStack}>
             <div className={styles.heroCollage}>
-              <h1 className={styles.heroWatermark}>Xchange</h1>
+              <h1 className={`${styles.heroWatermark} hero-title-in`}>Xchange</h1>
 
               <div className={styles.heroPhoto}>
                 <Image
@@ -213,7 +202,7 @@ export default function XchangePage() {
         {/* ---------- crisis (app dark) ---------- */}
         <section className={`${styles.bleed} ${styles.crisis} reveal`}>
           <div className={styles.crisisInner}>
-            <h2 className={styles.crisisTitle}>It&rsquo;s 2250</h2>
+            <h2 className={`${styles.crisisTitle} reveal-heading`}>It&rsquo;s 2250</h2>
             <div className={styles.crisisBody}>
               <p>The sun is gone.</p>
               <p>
@@ -238,7 +227,7 @@ export default function XchangePage() {
                 alt=""
                 aria-hidden
               />
-              <p className={styles.hmwLabel}>HMW</p>
+              <p className={`${styles.hmwLabel} reveal-heading`}>HMW</p>
               <p className={styles.hmwQuestion}>
                 Help people in a resource-scarce world track what they need,
                 find neighbors with surplus, and negotiate fair exchanges, so
@@ -248,7 +237,7 @@ export default function XchangePage() {
             </div>
 
             <div className={styles.resourceRow}>
-              <div className={styles.resourceItem}>
+              <div className={`${styles.resourceItem} reveal-left`}>
                 {/* eslint-disable-next-line @next/next/no-img-element -- local SVG, next/image optimizer rejects SVG by default */}
                 <img
                   className={styles.resourceIcon}
@@ -267,7 +256,7 @@ export default function XchangePage() {
                 width={62}
                 height={54}
               />
-              <div className={styles.resourceItem}>
+              <div className={`${styles.resourceItem} reveal-right`}>
                 {/* eslint-disable-next-line @next/next/no-img-element -- local SVG, next/image optimizer rejects SVG by default */}
                 <img
                   className={styles.resourceIcon}
@@ -292,13 +281,16 @@ export default function XchangePage() {
 
         {/* ---------- UX UI research ---------- */}
         <section className={`${styles.section} ${styles.uxSection} reveal`}>
-          <h2 className={`${styles.sectionTitle} ${styles.inter}`}>
+          <h2 className={`${styles.sectionTitle} ${styles.inter} reveal-heading`}>
             UX UI Research
           </h2>
 
           <div className={styles.uxRows}>
-            {RESEARCH.map(({ app, icon, shots, ratio }) => (
-              <div className={styles.uxRow} key={app}>
+            {RESEARCH.map(({ app, icon, shots, ratio }, i) => (
+              <div
+                className={`${styles.uxRow} ${i % 2 === 0 ? "reveal-left" : "reveal-right"}`}
+                key={app}
+              >
                 <div className={styles.uxHeader}>
                   <div className={styles.uxLogos}>
                     <Image
@@ -335,7 +327,7 @@ export default function XchangePage() {
         {/* ---------- user flow (full-bleed, app-dark) ---------- */}
         <section className={`${styles.bleed} ${styles.userFlowSection} reveal`}>
           <div className={styles.userFlowInner}>
-            <h2 className={`${styles.sectionTitle} ${styles.inter}`}>
+            <h2 className={`${styles.sectionTitle} ${styles.inter} reveal-heading`}>
               User Flow
             </h2>
 
@@ -428,7 +420,7 @@ export default function XchangePage() {
 
         {/* ---------- main flow ---------- */}
         <section className={`${styles.section} reveal`}>
-          <h2 className={`${styles.sectionTitle} ${styles.inter}`}>
+          <h2 className={`${styles.sectionTitle} ${styles.inter} reveal-heading`}>
             Main Flow
           </h2>
 

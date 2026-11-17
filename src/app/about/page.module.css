@@ -44,6 +44,7 @@
 }
 
 .title {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: clamp(44px, 8.6vw, 86px);
   font-weight: 700;
   line-height: 1.2;
@@ -67,6 +68,7 @@
 }
 
 .moreHeading {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: clamp(22px, 2.6vw, 26px);
   font-weight: 700;
   line-height: 1.2;

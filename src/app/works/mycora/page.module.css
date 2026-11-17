@@ -17,6 +17,7 @@
 /* ---------- hero ---------- */
 
 .heroTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   padding: 40px var(--gutter);
   font-size: 70px;
   font-weight: 800;
@@ -78,6 +79,7 @@
 }
 
 .eyebrow {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 24px;
   font-weight: 600;
   line-height: 1.2;
@@ -109,6 +111,7 @@
 }
 
 .roleName {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   padding-top: 8px;
   font-size: 28px;
   font-weight: 600;
@@ -162,6 +165,7 @@
 }
 
 .stepTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: normal;
@@ -243,6 +247,7 @@
 }
 
 .frictionTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: normal;
@@ -275,6 +280,7 @@
 }
 
 .statementText {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   margin: 0 auto;
   max-width: 894px;
   font-size: 36px;
@@ -359,22 +365,29 @@
   padding: 80px var(--gutter);
 }
 
-.sketchRow {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-}
-
-.featureRow {
+/* Each card pairs one sketch with its own caption so the two move together
+   at every breakpoint — two separately-reflowing rows (an image strip above
+   a text grid) could drift out of sync once their column counts diverged. */
+.pairGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 32px 25px;
+  gap: 40px 24px;
+}
+
+.pairCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   text-align: center;
 }
 
+.pairCard :global(img) {
+  max-width: 100%;
+}
+
 .featureTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 20px;
   font-weight: 600;
   line-height: normal;
@@ -433,6 +446,7 @@
 }
 
 .prototypeLink {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   display: block;
   font-size: 28px;
   font-weight: 900;
@@ -447,10 +461,6 @@
 
 @media (--tablet) {
   .lifecycle {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .featureRow {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -566,26 +576,13 @@
     align-items: center;
   }
 
-  .sketchRow,
-  .featureRow {
+  .pairGrid {
     width: min(1028px, 100%);
+    gap: 48px 25px;
   }
 
-  .sketchRow {
-    justify-content: center;
-    gap: 47px;
-    overflow-x: visible;
-  }
-
-  .sketchRowWide {
-    gap: 48px;
-  }
-
-  .featureRow {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    align-items: flex-start;
+  .pairGridWide {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .screens {

@@ -12,6 +12,7 @@ export default function ProjectCard({
   index = 0,
 }: Project & { index?: number }) {
   const revealClass = index % 2 === 0 ? "reveal" : "reveal-1";
+  const badge = tags?.[0];
   const body = (
     <>
       <div className={styles.imageWrap}>
@@ -31,15 +32,7 @@ export default function ProjectCard({
       </div>
       <div className={styles.meta}>
         <h2 className={styles.title}>{title}</h2>
-        {tags && tags.length > 0 && (
-          <ul className={styles.tags}>
-            {tags.map((tag) => (
-              <li key={tag} className={styles.tag}>
-                {tag}
-              </li>
-            ))}
-          </ul>
-        )}
+        {badge && <span className={styles.badge}>{badge}</span>}
       </div>
     </>
   );

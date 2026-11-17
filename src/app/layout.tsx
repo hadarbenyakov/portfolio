@@ -18,6 +18,20 @@ const clashGrotesk = localFont({
   display: "swap",
 });
 
+/* Levit 1950 — the home hero entrance display face */
+const levit1950 = localFont({
+  src: [{ path: "./fonts/Levit_1950-BlackExtended.otf", weight: "400", style: "normal" }],
+  variable: "--font-levit",
+  display: "swap",
+});
+
+/* Liebling Pro TRIAL (Light) — site-wide running text */
+const lieblingPro = localFont({
+  src: [{ path: "./fonts/LieblingProTRIAL-Light.otf", weight: "300", style: "normal" }],
+  variable: "--font-liebling",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Hadar Ben Yaakov — Portfolio",
   description:
@@ -26,7 +40,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${clashGrotesk.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${clashGrotesk.variable} ${levit1950.variable} ${lieblingPro.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

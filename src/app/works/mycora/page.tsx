@@ -106,6 +106,16 @@ const OWNER_FEATURES = [
   },
 ];
 
+/** Paired 1:1 with OWNER_FEATURES by index, so each sketch moves together
+ *  with its own caption at every breakpoint instead of two rows that can
+ *  drift apart once they reflow independently. */
+const OWNER_SKETCHES = [
+  { src: "oo-sketch-1.png", width: 162, height: 207, rotated: true },
+  { src: "oo-sketch-2.png", width: 225, height: 152 },
+  { src: "oo-sketch-3.png", width: 166, height: 219.8, rotated: true },
+  { src: "oo-sketch-4.png", width: 227, height: 155 },
+];
+
 const OWNER_SCREENS = [
   {
     title: "Dashboard+Insights Management",
@@ -139,10 +149,65 @@ const HUNTER_FEATURES = [
   { title: "Summary", body: "earnings and findings" },
 ];
 
+/** Paired 1:1 with HUNTER_FEATURES by index — same reasoning as
+ *  OWNER_SKETCHES above. */
+const HUNTER_SKETCHES = [
+  {
+    src: "hunter-sketch-a.png",
+    width: 209,
+    height: 106.756,
+    crop: { left: "-9.13%", width: "109.13%", height: "283.93%" },
+    rotated: true,
+  },
+  {
+    src: "hunter-sketch-b.png",
+    width: 150,
+    height: 209,
+    crop: { height: "105.84%" },
+  },
+  {
+    src: "hunter-sketch-c.png",
+    width: 150,
+    height: 210,
+    crop: { height: "106.37%" },
+  },
+  {
+    src: "hunter-sketch-a.png",
+    width: 215,
+    height: 121.181,
+    crop: {
+      left: "-20.42%",
+      top: "-190.19%",
+      width: "120.42%",
+      height: "283.93%",
+    },
+    rotated: true,
+  },
+  {
+    src: "hunter-sketch-d.png",
+    width: 215,
+    height: 127.621,
+    crop: { left: "-38.42%", width: "138.42%", height: "311.33%" },
+    rotated: true,
+  },
+  {
+    src: "hunter-sketch-d.png",
+    width: 215,
+    height: 105.488,
+    crop: {
+      left: "-14.41%",
+      top: "-104.72%",
+      width: "114.41%",
+      height: "311.33%",
+    },
+    rotated: true,
+  },
+];
+
 function RoleHeading({ name, kind }: { name: string; kind: string }) {
   return (
     <div className={styles.roleHeading}>
-      <p className={styles.roleName}>{name}</p>
+      <p className={`${styles.roleName} reveal-heading`}>{name}</p>
       <p className={styles.roleKind}>{kind}</p>
     </div>
   );
@@ -156,7 +221,7 @@ export default function MycoraPage() {
       <ProjectNav slug="mycora" />
 
       <main className={styles.main}>
-        <h1 className={styles.heroTitle}>Mycora</h1>
+        <h1 className={`${styles.heroTitle} hero-title-in`}>Mycora</h1>
 
         <div className={styles.heroMedia}>
           <MacbookMockup
@@ -186,7 +251,7 @@ export default function MycoraPage() {
         {/* ---------- Research ---------- */}
         <section className={`${styles.research} reveal`}>
           <div className={styles.intro}>
-            <h2 className={styles.eyebrow}>Research</h2>
+            <h2 className={`${styles.eyebrow} reveal-heading`}>Research</h2>
             <p className={styles.lede}>
               The research began by mapping the full lifecycle of a truffle.
               From the moment it begins growing underground, through the hunt
@@ -220,7 +285,7 @@ export default function MycoraPage() {
         {/* ---------- Focus area ---------- */}
         <section className={`${styles.focus} reveal`}>
           <div className={`${styles.intro} ${styles.introCentered}`}>
-            <h2 className={`${styles.eyebrow} ${styles.eyebrowBold}`}>
+            <h2 className={`${styles.eyebrow} ${styles.eyebrowBold} reveal-heading`}>
               Focus Area - Optimizing the Workflow
             </h2>
             <p className={styles.lede}>
@@ -290,7 +355,7 @@ export default function MycoraPage() {
         {/* ---------- UX/UI research ---------- */}
         <section className={`${styles.uxResearch} reveal`}>
           <div className={`${styles.intro} ${styles.uxIntro}`}>
-            <h2 className={styles.eyebrow}>UX UI Research</h2>
+            <h2 className={`${styles.eyebrow} reveal-heading`}>UX UI Research</h2>
             <p className={styles.lede}>
               As part of this project, I conducted extensive UX/UI research
               across a range of apps and websites, identifying key values and
@@ -336,42 +401,26 @@ export default function MycoraPage() {
         <section className={`${styles.sketches} reveal`}>
           <RoleHeading name="Orchard Owner" kind="sketches" />
 
-          <div className={styles.sketchRow}>
-            <CroppedImage
-              src={`${A}/oo-sketch-1.png`}
-              alt=""
-              width={162}
-              height={207}
-              rotated
-            />
-            <CroppedImage
-              src={`${A}/oo-sketch-2.png`}
-              alt=""
-              width={225}
-              height={152}
-            />
-            <CroppedImage
-              src={`${A}/oo-sketch-3.png`}
-              alt=""
-              width={166}
-              height={219.8}
-              rotated
-            />
-            <CroppedImage
-              src={`${A}/oo-sketch-4.png`}
-              alt=""
-              width={227}
-              height={155}
-            />
-          </div>
-
-          <div className={styles.featureRow}>
-            {OWNER_FEATURES.map(({ title, body }) => (
-              <div key={title}>
-                <h3 className={styles.featureTitle}>{title}</h3>
-                <p className={styles.featureBody}>{body}</p>
-              </div>
-            ))}
+          <div className={styles.pairGrid}>
+            {OWNER_FEATURES.map(({ title, body }, i) => {
+              const sketch = OWNER_SKETCHES[i];
+              return (
+                <div
+                  className={`${styles.pairCard} reveal ${REVEAL_STAGGER[i % REVEAL_STAGGER.length]}`}
+                  key={title}
+                >
+                  <CroppedImage
+                    src={`${A}/${sketch.src}`}
+                    alt=""
+                    width={sketch.width}
+                    height={sketch.height}
+                    rotated={sketch.rotated}
+                  />
+                  <h3 className={styles.featureTitle}>{title}</h3>
+                  <p className={styles.featureBody}>{body}</p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -428,83 +477,37 @@ export default function MycoraPage() {
         <section className={`${styles.sketches} reveal`}>
           <RoleHeading name="Hunter" kind="sketches" />
 
-          <div className={`${styles.sketchRow} ${styles.sketchRowWide}`}>
-            <CroppedImage
-              src={`${A}/hunter-sketch-a.png`}
-              alt=""
-              width={209}
-              height={106.756}
-              crop={{ left: "-9.13%", width: "109.13%", height: "283.93%" }}
-              rotated
-            />
-            <CroppedImage
-              src={`${A}/hunter-sketch-b.png`}
-              alt=""
-              width={150}
-              height={209}
-              crop={{ height: "105.84%" }}
-            />
-            <CroppedImage
-              src={`${A}/hunter-sketch-c.png`}
-              alt=""
-              width={150}
-              height={210}
-              crop={{ height: "106.37%" }}
-            />
-            <CroppedImage
-              src={`${A}/hunter-sketch-a.png`}
-              alt=""
-              width={215}
-              height={121.181}
-              crop={{
-                left: "-20.42%",
-                top: "-190.19%",
-                width: "120.42%",
-                height: "283.93%",
-              }}
-              rotated
-            />
-            <CroppedImage
-              src={`${A}/hunter-sketch-d.png`}
-              alt=""
-              width={215}
-              height={127.621}
-              crop={{ left: "-38.42%", width: "138.42%", height: "311.33%" }}
-              rotated
-            />
-            <CroppedImage
-              src={`${A}/hunter-sketch-d.png`}
-              alt=""
-              width={215}
-              height={105.488}
-              crop={{
-                left: "-14.41%",
-                top: "-104.72%",
-                width: "114.41%",
-                height: "311.33%",
-              }}
-              rotated
-            />
-          </div>
-
-          <div className={styles.featureRow}>
-            {HUNTER_FEATURES.map(({ title, body }) => (
-              <div key={title}>
-                <h3
-                  className={`${styles.featureTitle} ${styles.featureTitleLarge}`}
+          <div className={`${styles.pairGrid} ${styles.pairGridWide}`}>
+            {HUNTER_FEATURES.map(({ title, body }, i) => {
+              const sketch = HUNTER_SKETCHES[i];
+              return (
+                <div
+                  className={`${styles.pairCard} reveal ${REVEAL_STAGGER[i % REVEAL_STAGGER.length]}`}
+                  key={title}
                 >
-                  {title}
-                </h3>
-                <p
-                  className={`${styles.featureBody} ${styles.featureBodyLight}`}
-                >
-                  {body}
-                </p>
-              </div>
-            ))}
+                  <CroppedImage
+                    src={`${A}/${sketch.src}`}
+                    alt=""
+                    width={sketch.width}
+                    height={sketch.height}
+                    crop={sketch.crop}
+                    rotated={sketch.rotated}
+                  />
+                  <h3
+                    className={`${styles.featureTitle} ${styles.featureTitleLarge}`}
+                  >
+                    {title}
+                  </h3>
+                  <p
+                    className={`${styles.featureBody} ${styles.featureBodyLight}`}
+                  >
+                    {body}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </section>
-
       </main>
 
       <Footer />

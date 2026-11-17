@@ -39,9 +39,15 @@ export default function Home() {
         </section>
 
         <section className={styles.works} id="works">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.slug} index={index} {...project} />
-          ))}
+          <div className={styles.worksHeader}>
+            <span className={styles.worksCount}>Items: {projects.length}</span>
+          </div>
+
+          <div className={styles.worksGrid}>
+            {projects.map((project, index) => (
+              <ProjectCard key={project.slug} index={index} {...project} />
+            ))}
+          </div>
         </section>
       </main>
 

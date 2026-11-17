@@ -18,7 +18,7 @@
    past the viewport edge — so mobile gets its own centred, wrapping
    composition instead of a scaled-down copy of the 1512 frame. */
 .title {
-  font-family: var(--font-clash), var(--font-inter), sans-serif;
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-weight: 300;
   font-size: min(15vw, 194px);
   line-height: 1.05;
@@ -75,14 +75,18 @@
 
 .tagline,
 .scrollHint {
-  font-family: var(--font-clash), var(--font-inter), sans-serif;
   line-height: 1.1;
   letter-spacing: var(--tracking-display);
   text-align: center;
 }
 
+.scrollHint {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
+}
+
 .tagline {
   margin-top: 16px;
+  font-family: var(--font-liebling), var(--font-inter), sans-serif;
   font-weight: 300;
   font-size: clamp(14px, 4vw, 34px);
 }
@@ -116,13 +120,13 @@
     margin-left: 14.29%;
   }
 
-  /* 34px at the 1512 frame width, Clash Grotesk Light.
+  /* 34px at the 1512 frame width.
      Sits right under the title, snug against it — and starts at the
      same x as "HADAR" (line2 shares its margin-left). */
   .tagline {
     align-self: flex-start;
     width: fit-content;
-    margin: calc(min(1.5vw, 24px) - 27px) 0 0 30.61%;
+    margin: calc(min(1.5vw, 24px) + 4px) 0 0 30.61%;
     font-size: clamp(14px, 2.25vw, 34px);
   }
 }
@@ -157,28 +161,52 @@
 }
 
 /* ---------- work grid ---------- */
-/* Breaks out of .main's 1512px cap (left:50% + translateX trick) so cards
-   can keep growing on very large screens instead of staying capped at the
-   Figma frame width — mobile gets a slightly tighter inset to read smaller. */
+/* Breaks out of .main's 1512px cap (left:50% + translateX trick) and runs
+   near edge-to-edge (no max-width cap) so the cards spread across almost the
+   full viewport width — a minimum 32px side margin keeps both the header and
+   the grid off the viewport edge, with a tight gap between cards. */
 
 .works {
   position: relative;
   left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  padding: 0 32px 80px;
+}
+
+.worksHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.worksCount {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+.worksGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
-  width: 100vw;
-  max-width: 1760px;
-  margin-left: -50vw;
-  padding: 0 calc(var(--gutter) + 12px) 80px;
+  gap: 8px;
 }
 
 @media (--tablet) {
   .works {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  .worksGrid {
     grid-template-columns: repeat(2, 1fr);
-    column-gap: min(7.1vw, 108px);
-    row-gap: min(7.9vw, 119px);
-    padding: 0 var(--gutter) 80px;
+    gap: 18px;
   }
 }
 
@@ -191,11 +219,5 @@
   .works {
     padding-left: 120px;
     padding-right: 120px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .works {
-    max-width: 1920px;
   }
 }

@@ -60,8 +60,8 @@ body {
   flex-direction: column;
   color: var(--color-fg);
   background: var(--color-bg);
-  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Helvetica, Arial, sans-serif;
+  font-family: var(--font-liebling), var(--font-inter), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -151,18 +151,18 @@ img {
   }
 
   .reveal-right {
-    --reveal-slide-x: 36px;
+    --reveal-slide-x: 20px;
   }
 
   .reveal-left {
-    --reveal-slide-x: -36px;
+    --reveal-slide-x: -20px;
   }
 }
 
 @keyframes reveal-scale-in {
   from {
     opacity: 0;
-    transform: scale(0.92);
+    transform: scale(0.97);
   }
 
   to {
@@ -179,6 +179,42 @@ img {
 
   to {
     opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Headings get their own identity across every case study: a left-to-right
+   wipe instead of the plain fade-up body copy uses, so a title always reads
+   as a distinct, deliberate beat rather than just "more content arrived".
+   - .reveal-heading: for in-page headings — scroll-triggered, same
+     entry/view-timeline mechanics as the rest of the reveal family.
+   - .hero-title-in: for each case study's big H1 — it's already on screen
+     at load (nothing to scroll to), so this plays once on mount instead. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-heading {
+    animation-name: heading-wipe-in;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+
+  .hero-title-in {
+    animation: heading-wipe-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+}
+
+@keyframes heading-wipe-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-8px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
     transform: translateX(0);
   }
 }

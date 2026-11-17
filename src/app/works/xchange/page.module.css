@@ -17,13 +17,11 @@
   flex: 1;
   background: var(--page-bg);
   color: var(--ink);
-  font-family: var(--font-pjs), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Helvetica, Arial, sans-serif;
+  font-family: var(--font-liebling), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* The three headings + the closing link use Inter in the Figma file while
-   everything else uses Plus Jakarta Sans — kept as designed rather than
-   normalized. */
+/* The three headings + the closing link use Inter in the Figma file. */
 .inter {
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont,
     "Segoe UI", Helvetica, Arial, sans-serif;
@@ -76,6 +74,7 @@
 }
 
 .heroWatermark {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   top: 0%;
   left: 3.3%;
   font-size: clamp(48px, 23.46cqw, 271px);
@@ -98,6 +97,7 @@
 }
 
 .heroTagline {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   top: 77.35%;
   left: 0;
   width: 37.7%;
@@ -199,6 +199,7 @@
 }
 
 .crisisTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: clamp(40px, 11vw, 96px);
   font-weight: 800;
   line-height: 1.15;
@@ -266,6 +267,7 @@
 }
 
 .hmwLabel {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: clamp(48px, 9vw, 84px);
   font-weight: 800;
   line-height: 1;
@@ -318,6 +320,32 @@
   flex-shrink: 0;
 }
 
+/* Signature touch for this project: the swap icon gives a single quiet
+   turn as it scrolls into view, and the two resources either side of it
+   slide in from opposite directions as if trading places. */
+@media (prefers-reduced-motion: no-preference) {
+  .swapIcon {
+    animation-name: swapSpin;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+}
+
+@keyframes swapSpin {
+  from {
+    opacity: 0;
+    transform: rotate(-35deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
 .resourcesNote {
   position: relative;
   z-index: 1;
@@ -345,6 +373,7 @@
 }
 
 .sectionTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -650,6 +679,7 @@
 }
 
 .walkTitle {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-size: 24px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -675,6 +705,7 @@
 }
 
 .closingLink {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
   display: inline-block;
   font-size: clamp(22px, 4vw, 32px);
   font-weight: 700;

@@ -39,7 +39,7 @@ export default function SoundPlaygroundPage() {
           <div className={styles.deviceFrame}>
             <DeviceVideo src={`${A}/hero.mp4`} label="Sound Playground in Figma" />
           </div>
-          <h1 className={styles.title}>Sound Playground</h1>
+          <h1 className={`${styles.title} hero-title-in`}>Sound Playground</h1>
           <p className={styles.subtitle}>
             This is a Figma Community asset for for people who love sound and its connection to
             visuals. It&rsquo;s a space to play and explore the relationship between the two.
@@ -48,7 +48,7 @@ export default function SoundPlaygroundPage() {
 
         <section className={`${styles.textBlock} reveal`}>
           <div className={styles.block}>
-            <h2 className={styles.heading}>Why ?</h2>
+            <h2 className={`${styles.heading} reveal-heading`}>Why ?</h2>
             <p className={styles.body}>
               The connection between visuals and sound has always fascinated me. When I was given
               an assignment to create an asset in Figma for people to experience within the
@@ -72,7 +72,7 @@ export default function SoundPlaygroundPage() {
             </div>
             <section className={`${styles.textBlockTight} reveal`}>
               <div className={styles.block}>
-                <h2 className={styles.heading}>{heading}</h2>
+                <h2 className={`${styles.heading} reveal-heading`}>{heading}</h2>
                 <p className={styles.body}>{body}</p>
               </div>
             </section>
