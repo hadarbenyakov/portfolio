@@ -39,8 +39,8 @@ export default function Home() {
         </section>
 
         <section className={styles.works} id="works">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} {...project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={project.slug} index={index} {...project} />
           ))}
         </section>
       </main>

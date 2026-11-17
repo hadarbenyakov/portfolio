@@ -75,3 +75,110 @@ img {
   display: block;
   max-width: 100%;
 }
+
+/* ---------- scroll-triggered entrance ---------- */
+/* Pure CSS: ties the animation's progress to the element's own scroll
+   position (no JS, no IntersectionObserver). Browsers without
+   animation-timeline support just play it once on load instead — a fine
+   fallback, not a broken state. Drop onto any element via the plain
+   (unscoped) class name "reveal", optionally with "reveal-1"/"reveal-2" for
+   a staggered group. */
+/* Longhand on purpose: the "reveal" family and the "reveal-N" stagger
+   classes are meant to be combined on the same element (e.g.
+   class="reveal-scale reveal-2"), and the `animation` SHORTHAND resets
+   animation-delay to 0 — so whichever rule happened to come later in the
+   cascade would silently cancel the other's delay. Longhand properties
+   don't have that problem: each stays independent regardless of order. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal,
+  .reveal-1,
+  .reveal-2,
+  .reveal-3 {
+    animation-name: reveal-up;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  .reveal-1 {
+    animation-delay: 80ms;
+  }
+
+  .reveal-2 {
+    animation-delay: 160ms;
+  }
+
+  .reveal-3 {
+    animation-delay: 240ms;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Same scroll-timeline mechanics as .reveal, different motifs — each
+   case study picks whichever fits its theme instead of every element
+   reusing one generic fade-up. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-scale {
+    animation-name: reveal-scale-in;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  .reveal-left,
+  .reveal-right {
+    animation-name: reveal-slide-in;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+
+  .reveal-right {
+    --reveal-slide-x: 36px;
+  }
+
+  .reveal-left {
+    --reveal-slide-x: -36px;
+  }
+}
+
+@keyframes reveal-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--reveal-slide-x));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

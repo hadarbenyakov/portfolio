@@ -46,7 +46,7 @@ export default function SoundPlaygroundPage() {
           </p>
         </section>
 
-        <section className={styles.textBlock}>
+        <section className={`${styles.textBlock} reveal`}>
           <div className={styles.block}>
             <h2 className={styles.heading}>Why ?</h2>
             <p className={styles.body}>
@@ -70,7 +70,7 @@ export default function SoundPlaygroundPage() {
                 sizes="(min-width: 1280px) 1280px, 100vw"
               />
             </div>
-            <section className={styles.textBlockTight}>
+            <section className={`${styles.textBlockTight} reveal`}>
               <div className={styles.block}>
                 <h2 className={styles.heading}>{heading}</h2>
                 <p className={styles.body}>{body}</p>
@@ -83,14 +83,14 @@ export default function SoundPlaygroundPage() {
           <DeviceVideo src={`${A}/showcase.mp4`} label="Sound Playground walkthrough" />
         </div>
 
-        <section className={styles.quote}>
+        <section className={`${styles.quote} reveal`}>
           <p className={styles.quoteText}>
             A playful place to explore the connection between sound and visuals, inviting users to
             explore, experiment, and create their own personalized sound playground.
           </p>
         </section>
 
-        <section className={styles.cta}>
+        <section className={`${styles.cta} reveal`}>
           <button className={styles.ctaButton} type="button">
             Check It Out
           </button>

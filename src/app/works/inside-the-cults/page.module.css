@@ -191,6 +191,49 @@
   overflow: hidden;
 }
 
+/* Signature entrance for this project: the portrait glitches into focus
+   as it scrolls in, echoing the pixelation concept — a constructed image
+   assembling itself rather than a plain fade. */
+@media (prefers-reduced-motion: no-preference) {
+  .portrait {
+    animation-name: cultMaterialize;
+    animation-duration: 0.9s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+@keyframes cultMaterialize {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.88) translateX(0);
+  }
+
+  35% {
+    opacity: 1;
+    filter: blur(1.5px);
+    transform: scale(1.015) translateX(-5px);
+  }
+
+  55% {
+    filter: blur(0.5px);
+    transform: scale(0.99) translateX(4px);
+  }
+
+  75% {
+    transform: scale(1.005) translateX(-2px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) translateX(0);
+  }
+}
+
 .portraitPhoto {
   object-fit: cover;
 }
@@ -233,6 +276,31 @@
   font-size: clamp(28px, 5.9vw, 59px);
   font-weight: 900;
   line-height: 1.25;
+}
+
+/* A single overshooting "breath" as the line scrolls in, rather than a
+   flat fade — a little unsettling, which fits the subject. */
+@media (prefers-reduced-motion: no-preference) {
+  .statementText {
+    animation-name: statementBreathe;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+}
+
+@keyframes statementBreathe {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* ---------- phone walkthrough ---------- */
@@ -293,6 +361,25 @@
   text-align: center;
   text-decoration: underline;
   text-underline-position: from-font;
+}
+
+/* A slow, constant heartbeat-like pulse — not scroll-tied — to keep
+   pulling the eye toward the invitation the whole time it's on screen. */
+@media (prefers-reduced-motion: no-preference) {
+  .diveIn {
+    animation: diveInPulse 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes diveInPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
 }
 
 /* ---------- automation note ---------- */

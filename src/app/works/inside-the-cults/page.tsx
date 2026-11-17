@@ -103,7 +103,7 @@ export default function InsideTheCultsPage() {
           </div>
         </section>
 
-        <section className={styles.prose}>
+        <section className={`${styles.prose} reveal`}>
           <p className={styles.body}>
             An experiential platform created as part of an Emotional Design
             course.
@@ -124,7 +124,7 @@ export default function InsideTheCultsPage() {
           </div>
         </section>
 
-        <section className={styles.researchShots}>
+        <section className={`${styles.researchShots} reveal`}>
           {RESEARCH_SHOTS.map(({ src, w, h, crop }, i) => (
             <div
               className={styles.shot}
@@ -151,7 +151,7 @@ export default function InsideTheCultsPage() {
           ))}
         </section>
 
-        <section className={styles.visual}>
+        <section className={`${styles.visual} reveal`}>
           <div className={`${styles.block} ${styles.visualIntro}`}>
             <h2 className={styles.heading}>Visual Language</h2>
             <p className={styles.body}>
@@ -195,13 +195,13 @@ export default function InsideTheCultsPage() {
           </div>
         </section>
 
-        <section className={styles.statement}>
+        <section className={`${styles.statement} reveal`}>
           <p className={styles.statementText}>
             This platform invites you to dive into the hidden world of cults.
           </p>
         </section>
 
-        <section className={styles.walkthrough}>
+        <section className={`${styles.walkthrough} reveal`}>
           {WALKTHROUGH.map(({ file, title, body }) => (
             <div className={styles.walkStep} key={file}>
               <div className={styles.walkPhone}>
@@ -227,7 +227,7 @@ export default function InsideTheCultsPage() {
           Dive In
         </a>
 
-        <section className={`${styles.automation} ${styles.bleed}`}>
+        <section className={`${styles.automation} ${styles.bleed} reveal`}>
           <div className={styles.automationInner}>
             <div className={`${styles.block} ${styles.automationIntro}`}>
               <h2 className={styles.automationHeading}>Can I Just AI This?</h2>

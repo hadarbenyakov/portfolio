@@ -423,13 +423,6 @@
   text-align: center;
 }
 
-.phoneRow {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  justify-items: center;
-}
-
 .phone {
   position: relative;
   width: 100%;
@@ -459,10 +452,6 @@
 
   .featureRow {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  .phoneRow {
-    grid-template-columns: repeat(4, 1fr);
   }
 
   .statementText {
@@ -608,16 +597,6 @@
   .screenStack {
     gap: 154px;
     width: min(819.699px, 100%);
-  }
-
-  .phoneRow {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-  }
-
-  .phoneRow > *:not(:last-child) {
-    margin-right: -19px;
   }
 
   .prototypeLink {

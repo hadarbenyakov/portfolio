@@ -31,6 +31,41 @@
   display: block;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .line {
+    animation: lineIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .line1 {
+    animation-delay: 0ms;
+  }
+
+  .line2 {
+    animation-delay: 90ms;
+  }
+
+  .line3 {
+    animation-delay: 180ms;
+  }
+
+  .tagline {
+    animation: lineIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 300ms;
+  }
+}
+
+@keyframes lineIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.3em);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .heroMeta {
   position: relative;
   display: flex;

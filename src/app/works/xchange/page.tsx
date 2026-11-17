@@ -211,7 +211,7 @@ export default function XchangePage() {
         </section>
 
         {/* ---------- crisis (app dark) ---------- */}
-        <section className={`${styles.bleed} ${styles.crisis}`}>
+        <section className={`${styles.bleed} ${styles.crisis} reveal`}>
           <div className={styles.crisisInner}>
             <h2 className={styles.crisisTitle}>It&rsquo;s 2250</h2>
             <div className={styles.crisisBody}>
@@ -228,7 +228,7 @@ export default function XchangePage() {
         </section>
 
         {/* ---------- HMW (orange) ---------- */}
-        <section className={`${styles.bleed} ${styles.system}`}>
+        <section className={`${styles.bleed} ${styles.system} reveal`}>
           <div className={styles.systemInner}>
             <div className={styles.hmw}>
               {/* eslint-disable-next-line @next/next/no-img-element -- local SVG, next/image optimizer rejects SVG by default */}
@@ -291,7 +291,7 @@ export default function XchangePage() {
         </section>
 
         {/* ---------- UX UI research ---------- */}
-        <section className={`${styles.section} ${styles.uxSection}`}>
+        <section className={`${styles.section} ${styles.uxSection} reveal`}>
           <h2 className={`${styles.sectionTitle} ${styles.inter}`}>
             UX UI Research
           </h2>
@@ -333,7 +333,7 @@ export default function XchangePage() {
         </section>
 
         {/* ---------- user flow (full-bleed, app-dark) ---------- */}
-        <section className={`${styles.bleed} ${styles.userFlowSection}`}>
+        <section className={`${styles.bleed} ${styles.userFlowSection} reveal`}>
           <div className={styles.userFlowInner}>
             <h2 className={`${styles.sectionTitle} ${styles.inter}`}>
               User Flow
@@ -427,7 +427,7 @@ export default function XchangePage() {
         </section>
 
         {/* ---------- main flow ---------- */}
-        <section className={styles.section}>
+        <section className={`${styles.section} reveal`}>
           <h2 className={`${styles.sectionTitle} ${styles.inter}`}>
             Main Flow
           </h2>
@@ -451,7 +451,7 @@ export default function XchangePage() {
         </section>
 
         {/* ---------- closing ---------- */}
-        <section className={styles.closing}>
+        <section className={`${styles.closing} reveal`}>
           <a
             className={`${styles.closingLink} ${styles.inter}`}
             href={USER_FLOW_SITE}

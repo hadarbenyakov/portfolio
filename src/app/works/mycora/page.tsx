@@ -10,6 +10,9 @@ import styles from "./page.module.css";
 
 const A = "/projects/mycora";
 
+/** Cycles the global reveal-N stagger delays across a mapped list. */
+const REVEAL_STAGGER = ["", "reveal-1", "reveal-2"];
+
 export const metadata: Metadata = {
   title: "Mycora — Hadar Ben Yaakov",
   description:
@@ -18,8 +21,6 @@ export const metadata: Metadata = {
 
 const PROTOTYPE_OWNER =
   "https://www.figma.com/proto/BCAvgf4k3Ey7ZJK3x0QvmQ/Truffles--Copy-?page-id=0%3A1&node-id=352-8520&viewport=-3641%2C-3540%2C0.21&t=FE5iMdnmplfs13PT-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=352%3A8520&show-proto-sidebar=1";
-const PROTOTYPE_HUNTER =
-  "https://www.figma.com/proto/BCAvgf4k3Ey7ZJK3x0QvmQ/Truffles--Copy-?page-id=0%3A1&node-id=152-9219&viewport=-3641%2C-3540%2C0.21&t=YM96L8VtP3PI4AUA-1&scaling=contain&content-scaling=fixed&starting-point-node-id=379%3A11953&show-proto-sidebar=1";
 
 const LIFECYCLE = [
   {
@@ -123,13 +124,6 @@ const OWNER_SCREENS = [
   },
 ];
 
-const HUNTER_SCREENS = [
-  "hunter-1.mp4",
-  "hunter-2.mp4",
-  "hunter-3.mp4",
-  "hunter-4.mp4",
-];
-
 const HUNTER_FEATURES = [
   {
     title: "Est. Income & Findings",
@@ -190,7 +184,7 @@ export default function MycoraPage() {
         </p>
 
         {/* ---------- Research ---------- */}
-        <section className={styles.research}>
+        <section className={`${styles.research} reveal`}>
           <div className={styles.intro}>
             <h2 className={styles.eyebrow}>Research</h2>
             <p className={styles.lede}>
@@ -201,8 +195,11 @@ export default function MycoraPage() {
           </div>
 
           <ol className={styles.lifecycle}>
-            {LIFECYCLE.map(({ img, title, body }) => (
-              <li className={styles.step} key={title}>
+            {LIFECYCLE.map(({ img, title, body }, i) => (
+              <li
+                className={`${styles.step} reveal-scale ${REVEAL_STAGGER[i % REVEAL_STAGGER.length]}`}
+                key={title}
+              >
                 <div className={styles.stepImage}>
                   <Image
                     src={`${A}/${img}`}
@@ -221,7 +218,7 @@ export default function MycoraPage() {
         </section>
 
         {/* ---------- Focus area ---------- */}
-        <section className={styles.focus}>
+        <section className={`${styles.focus} reveal`}>
           <div className={`${styles.intro} ${styles.introCentered}`}>
             <h2 className={`${styles.eyebrow} ${styles.eyebrowBold}`}>
               Focus Area - Optimizing the Workflow
@@ -235,7 +232,7 @@ export default function MycoraPage() {
 
           <div className={styles.diagram}>
             <div
-              className={`${styles.diagramColumn} ${styles.diagramSide} ${styles.persona}`}
+              className={`${styles.diagramColumn} ${styles.diagramSide} ${styles.persona} reveal-left`}
             >
               <div className={styles.personaImage}>
                 <Image
@@ -248,7 +245,9 @@ export default function MycoraPage() {
               <p className={styles.personaName}>Hunter</p>
             </div>
 
-            <div className={`${styles.diagramColumn} ${styles.diagramCentre}`}>
+            <div
+              className={`${styles.diagramColumn} ${styles.diagramCentre} reveal-scale reveal-1`}
+            >
               <div className={styles.frictionCard}>
                 <div className={styles.frictionInner}>
                   <p className={styles.frictionTitle}>Friction</p>
@@ -266,7 +265,7 @@ export default function MycoraPage() {
             </div>
 
             <div
-              className={`${styles.diagramColumn} ${styles.diagramSide} ${styles.persona}`}
+              className={`${styles.diagramColumn} ${styles.diagramSide} ${styles.persona} reveal-right`}
             >
               <div className={styles.personaImage}>
                 <Image
@@ -282,14 +281,14 @@ export default function MycoraPage() {
         </section>
 
         {/* ---------- HMW ---------- */}
-        <section className={styles.statement}>
+        <section className={`${styles.statement} reveal`}>
           <p className={styles.statementText}>
             HMW create more certainty around truffle growth and hunting process?
           </p>
         </section>
 
         {/* ---------- UX/UI research ---------- */}
-        <section className={styles.uxResearch}>
+        <section className={`${styles.uxResearch} reveal`}>
           <div className={`${styles.intro} ${styles.uxIntro}`}>
             <h2 className={styles.eyebrow}>UX UI Research</h2>
             <p className={styles.lede}>
@@ -334,7 +333,7 @@ export default function MycoraPage() {
         </section>
 
         {/* ---------- Orchard Owner sketches ---------- */}
-        <section className={styles.sketches}>
+        <section className={`${styles.sketches} reveal`}>
           <RoleHeading name="Orchard Owner" kind="sketches" />
 
           <div className={styles.sketchRow}>
@@ -377,12 +376,15 @@ export default function MycoraPage() {
         </section>
 
         {/* ---------- Orchard Owner screens ---------- */}
-        <section className={styles.screens}>
+        <section className={`${styles.screens} reveal`}>
           <RoleHeading name="Orchard Owner" kind="Screens" />
 
           <div className={styles.screenStack}>
-            {OWNER_SCREENS.map(({ title, body, video }) => (
-              <div className={styles.screenBlock} key={title}>
+            {OWNER_SCREENS.map(({ title, body, video }, i) => (
+              <div
+                className={`${styles.screenBlock} reveal-scale ${REVEAL_STAGGER[i % REVEAL_STAGGER.length]}`}
+                key={title}
+              >
                 <MacbookMockup
                   alt={title}
                   video={`${A}/${video}`}
@@ -423,7 +425,7 @@ export default function MycoraPage() {
         </section>
 
         {/* ---------- Hunter sketches ---------- */}
-        <section className={styles.sketches}>
+        <section className={`${styles.sketches} reveal`}>
           <RoleHeading name="Hunter" kind="sketches" />
 
           <div className={`${styles.sketchRow} ${styles.sketchRowWide}`}>
@@ -503,30 +505,6 @@ export default function MycoraPage() {
           </div>
         </section>
 
-        {/* ---------- Hunter screens ---------- */}
-        <section className={styles.screens}>
-          <RoleHeading name="Hunter" kind="Screens" />
-
-          <div className={styles.phoneRow}>
-            {HUNTER_SCREENS.map((file, i) => (
-              <div className={styles.phone} key={file}>
-                <DeviceVideo
-                  src={`${A}/${file}`}
-                  label={`Hunter screen ${i + 1} recording`}
-                />
-              </div>
-            ))}
-          </div>
-
-          <a
-            className={styles.prototypeLink}
-            href={PROTOTYPE_HUNTER}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Hunter Prototype
-          </a>
-        </section>
       </main>
 
       <Footer />

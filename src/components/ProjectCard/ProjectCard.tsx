@@ -4,7 +4,14 @@ import { hasPublicAsset } from "@/lib/assets";
 import type { Project } from "@/data/projects";
 import styles from "./ProjectCard.module.css";
 
-export default function ProjectCard({ title, image, tags, href }: Project) {
+export default function ProjectCard({
+  title,
+  image,
+  tags,
+  href,
+  index = 0,
+}: Project & { index?: number }) {
+  const revealClass = index % 2 === 0 ? "reveal" : "reveal-1";
   const body = (
     <>
       <div className={styles.imageWrap}>
@@ -37,10 +44,10 @@ export default function ProjectCard({ title, image, tags, href }: Project) {
     </>
   );
 
-  if (!href) return <article className={styles.card}>{body}</article>;
+  if (!href) return <article className={`${styles.card} ${revealClass}`}>{body}</article>;
 
   return (
-    <article className={styles.card}>
+    <article className={`${styles.card} ${revealClass}`}>
       <Link className={styles.link} href={href}>
         {body}
       </Link>

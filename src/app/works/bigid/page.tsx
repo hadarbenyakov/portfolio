@@ -192,7 +192,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- about BigID (bleed) ---------- */}
-        <section className={`${styles.bleed} ${styles.about}`}>
+        <section className={`${styles.bleed} ${styles.about} reveal`}>
           <div className={styles.aboutInner}>
             <div className={styles.aboutLogo}>
               {/* eslint-disable-next-line @next/next/no-img-element -- local SVG, next/image optimizer rejects SVG by default */}
@@ -216,7 +216,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- problem ---------- */}
-        <section className={`${styles.section} ${styles.problemSection}`}>
+        <section className={`${styles.section} ${styles.problemSection} reveal`}>
           <div className={styles.problemIntro}>
             <h2 className={styles.problemTitle}>The Problem</h2>
             <p className={styles.problemLede}>
@@ -237,7 +237,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- HMW (its own full beat) ---------- */}
-        <section className={`${styles.section} ${styles.statementSection}`}>
+        <section className={`${styles.section} ${styles.statementSection} reveal`}>
           <div className={styles.statement}>
             <p className={styles.statementHmw}>HMW</p>
             <p className={styles.statementText}>
@@ -248,7 +248,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- research ---------- */}
-        <section className={styles.section}>
+        <section className={`${styles.section} reveal`}>
           <div className={styles.intro}>
             <h2 className={styles.eyebrowDark}>Research</h2>
             <p className={styles.lede}>
@@ -289,7 +289,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- framework ---------- */}
-        <section className={styles.section}>
+        <section className={`${styles.section} reveal`}>
           <div className={styles.intro}>
             <h2 className={styles.eyebrowDark}>The Framework</h2>
             <p className={styles.lede}>
@@ -317,7 +317,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- claude design tries (bleed) ---------- */}
-        <section className={`${styles.bleed} ${styles.claudeTries}`}>
+        <section className={`${styles.bleed} ${styles.claudeTries} reveal`}>
           <div className={styles.claudeTriesInner}>
             <h2 className={styles.claudeTriesTitle}>
               Claude&rsquo;s First Crack at Adoption
@@ -344,7 +344,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- product screens ---------- */}
-        <section className={styles.section}>
+        <section className={`${styles.section} reveal`}>
           <div className={styles.intro}>
             <h2 className={styles.eyebrowDark}>Inside the Dashboard</h2>
           </div>
@@ -419,7 +419,7 @@ export default function BigIdPage() {
         </section>
 
         {/* ---------- closing ---------- */}
-        <section className={styles.closing}>
+        <section className={`${styles.closing} reveal`}>
           <Image
             className={styles.closingMark}
             src={`${A}/logo-icon.svg`}
