@@ -19,9 +19,9 @@
   background: var(--accent);
 }
 
+/* No width cap: sections run near edge-to-edge with a ~32px side margin */
 .main {
   margin: 0 auto;
-  max-width: 1280px;
 }
 
 /* ---------- hero ---------- */
@@ -37,116 +37,147 @@
   align-items: center;
   justify-content: center;
   gap: 32px;
-  padding: 0 var(--gutter) clamp(64px, 12.5vw, 160px);
+  padding: 0 var(--gutter) clamp(64px, 10vw, 140px);
   background: var(--accent);
 }
 
-.heroInner,
-.automationInner {
+.heroInner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: inherit;
   width: 100%;
-  max-width: 1280px;
 }
 
 .heroHeading {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  max-width: 800px;
+  gap: 20px;
+  max-width: 1100px;
   text-align: center;
 }
 
 .title {
   font-family: var(--font-levit), var(--font-inter), sans-serif;
-  font-size: clamp(32px, 6.4vw, 64px);
+  font-size: clamp(40px, 7.5vw, 112px);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.02;
   letter-spacing: var(--tracking-display);
 }
 
 .tagline {
-  font-size: 18px;
+  font-size: clamp(18px, 1.8vw, 26px);
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: -0.005em;
   color: var(--color-fg-muted);
 }
 
+/* The recording's own ratio (3234×1828), so nothing is cropped, and sized
+   to whatever height is left under the title so it all fits on the first
+   screen without scrolling. */
 .heroMedia {
-  width: 100%;
-  max-width: 800px;
-  aspect-ratio: 798 / 492;
+  width: min(100%, calc((100svh - 370px) * 3234 / 1828));
+  min-width: min(100%, 320px);
+  aspect-ratio: 3234 / 1828;
   position: relative;
-  overflow: hidden;
+  container-type: inline-size;
+  /* Leaves room above for the bezel strip below */
+  margin-top: 1.4cqw;
+}
+
+/* hero.mp4 was exported with the laptop's top bezel cropped off (the frame
+   starts at the camera notch). This strip redraws the missing bezel at the
+   recording's own proportions — lid spans x 337→2883 of 3234, ~40px thick,
+   colour rgb(24 25 25) — so the mockup reads as a complete laptop. Remove it
+   if the video is ever re-exported with the full frame. */
+.heroMedia::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: calc(337 / 3234 * 100%);
+  width: calc((2883 - 337) / 3234 * 100%);
+  height: calc(40 / 3234 * 100cqw);
+  border-radius: 1.1cqw 1.1cqw 0 0;
+  background: rgb(24 25 25);
 }
 
 .prototypeLink {
   font-family: var(--font-levit), var(--font-inter), sans-serif;
-  font-size: clamp(24px, 3.8vw, 38px);
+  font-size: clamp(26px, 4vw, 52px);
   font-weight: 700;
-  line-height: 1.45;
+  line-height: 1.3;
   letter-spacing: -0.005em;
   text-decoration: underline;
   text-underline-position: from-font;
   text-align: center;
 }
 
-/* ---------- prose ---------- */
-
-.prose {
-  display: flex;
-  flex-direction: column;
-  gap: 168px;
-  margin: 0 auto;
-  max-width: 779px;
-  padding: 70px var(--gutter);
-}
-
-.block {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+/* ---------- story text ---------- */
 
 .heading {
   font-family: var(--font-levit), var(--font-inter), sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  color: var(--accent);
 }
 
 .body {
-  font-size: 18px;
+  font-size: clamp(19px, 1.65vw, 25px);
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: -0.005em;
   color: var(--color-fg-muted);
 }
 
-/* ---------- research screenshots ---------- */
-
-.researchShots {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  justify-items: center;
-  padding: clamp(48px, 9vw, 110px) var(--gutter);
+.body p + p {
+  margin-top: 1em;
 }
 
-@media (--tablet) {
-  .researchShots {
-    /* Figma butts the three captures together at their own widths; the ratios
-       are preserved as grid fractions so they scale as one strip. */
-    display: flex;
-    gap: 0;
-    align-items: flex-start;
-  }
+/* ---------- media frames (right column) ---------- */
+
+.frameWide {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 992 / 616;
+  overflow: hidden;
+}
+
+.framePhone {
+  position: relative;
+  height: calc(100vh - 112px - 32px);
+  aspect-ratio: 331 / 576;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.frameShot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2828 / 1482;
+  overflow: hidden;
+}
+
+.frameShot img {
+  object-fit: cover;
+}
+
+/* The three research captures: two side by side and the third centred
+   below, sized so the block fills the pinned column's height rather than
+   shrinking into a thin strip. */
+.researchShots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: min(100%, calc((100vh - 144px - 16px) * 1.04));
+}
+
+.researchShots > :last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 8px);
 }
 
 .shot {
@@ -165,31 +196,157 @@
   object-fit: fill;
 }
 
-/* ---------- visual language ---------- */
+/* ---------- takeover: long copy gets the whole screen ---------- */
 
-.visual {
+.takeover {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: clamp(96px, 12vw, 160px) var(--gutter);
+}
+
+.takeoverInner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
-  padding: clamp(48px, 8vw, 100px) var(--gutter) 40px;
+  gap: 32px;
+  width: 100%;
+  text-align: center;
 }
 
-.visualIntro {
-  max-width: 800px;
+.takeoverHeading {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
+  font-size: clamp(36px, 6vw, 96px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Running text (body face), large and centred */
+.takeoverText {
+  max-width: 1040px;
+  font-size: clamp(20px, 2.2vw, 32px);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+/* ---------- style guide: palette + fonts ---------- */
+/* Same white, centred language as the paragraph above it: Levit labels,
+   Liebling running text, black specimens. */
+
+.styleGuide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
   width: 100%;
+  max-width: 1040px;
+  margin-top: clamp(24px, 4vw, 56px);
+  padding-top: clamp(32px, 4vw, 56px);
+  border-top: 1px solid var(--color-divider);
+}
+
+.guideCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* Small running-text labels, so the specimens below carry the weight */
+.guideLabel {
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--color-fg-muted);
+}
+
+.swatches {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  list-style: none;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-fg-muted);
+}
+
+.swatchRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.swatch {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  /* Keeps the white swatch visible on the white page */
+  box-shadow: inset 0 0 0 1px var(--color-divider);
+}
+
+.fontAmbivalenti {
+  width: min(100%, 460px);
+  height: auto;
+}
+
+.fontArbel {
+  width: min(56%, 240px);
+  height: auto;
+}
+
+.fontOrbit {
+  font-size: clamp(20px, 2vw, 28px);
+}
+
+@media (--tablet) {
+  .styleGuide {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: clamp(32px, 5vw, 80px);
+  }
+}
+
+/* "Hover…" for mouse users, "Tap…" on touch screens */
+.portraitHint {
+  margin-top: 0;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 300;
+  color: var(--color-fg-muted);
+}
+
+.hintTap {
+  display: none;
+}
+
+@media (hover: none) {
+  .hintHover {
+    display: none;
+  }
+
+  .hintTap {
+    display: inline;
+  }
 }
 
 .portraits {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: clamp(16px, 4.5vw, 57px);
+  width: 100%;
+  max-width: 1040px;
+  gap: clamp(12px, 3vw, 40px);
+  margin-top: clamp(24px, 4vw, 56px);
 }
 
 .portrait {
   position: relative;
-  width: clamp(132px, 22vw, 280px);
+  flex: 1 1 0;
+  min-width: 0;
   aspect-ratio: 1;
   overflow: hidden;
 }
@@ -233,38 +390,35 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  /* Slower than the hover-in transition below, so the photo fades back
-     in gently once the cursor leaves. */
-  transition: opacity 1.1s ease;
+  /* Much slower than the hover-in transition below, so the pixels linger
+     and the photo fades back in gently once the cursor leaves. */
+  transition: opacity 2.6s var(--ease-in-out-cubic);
 }
 
-.portrait:hover .portraitSvg {
+.portrait:hover .portraitSvg,
+.portrait:active .portraitSvg {
   opacity: 1;
   transition: opacity 0.4s ease;
 }
 
-.overview {
-  position: relative;
-  width: 100%;
-  max-width: 992px;
-  aspect-ratio: 992 / 616;
-  overflow: hidden;
-}
-
-/* ---------- statement ---------- */
+/* ---------- statement: a full red screen ---------- */
 
 .statement {
-  padding: clamp(80px, 17vw, 220px) var(--gutter);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 120px var(--gutter);
+  background: var(--accent);
   text-align: center;
 }
 
 .statementText {
   font-family: var(--font-levit), var(--font-inter), sans-serif;
-  margin: 0 auto;
-  max-width: 768px;
-  font-size: clamp(28px, 5.9vw, 59px);
+  max-width: 1400px;
+  font-size: clamp(36px, 8vw, 128px);
   font-weight: 900;
-  line-height: 1.25;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
 }
 
 /* A single overshooting "breath" as the line scrolls in, rather than a
@@ -276,14 +430,14 @@
     animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     animation-fill-mode: both;
     animation-timeline: view();
-    animation-range: entry 0% entry 40%;
+    animation-range: entry 10% entry 60%;
   }
 }
 
 @keyframes statementBreathe {
   from {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.94);
   }
 
   to {
@@ -292,70 +446,21 @@
   }
 }
 
-/* ---------- phone walkthrough ---------- */
-
-.walkthrough {
-  display: flex;
-  flex-direction: column;
-  gap: 83px;
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 var(--gutter);
-}
-
-.walkStep {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-}
-
-.walkPhone {
-  position: relative;
-  width: min(331px, 100%);
-  max-width: 100%;
-  aspect-ratio: 331 / 576;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.walkCaption {
-  width: 292px;
-  max-width: 100%;
-}
-
-.walkTitle {
-  font-family: var(--font-levit), var(--font-inter), sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-}
-
-.walkBody {
-  margin-top: 16px;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  color: var(--color-fg-muted);
-}
+/* ---------- Dive In (closes the walkthrough) ---------- */
 
 .diveIn {
+  align-self: flex-start;
+  margin-top: 16px;
   font-family: var(--font-levit), var(--font-inter), sans-serif;
-  display: block;
-  padding: clamp(48px, 7vw, 80px) var(--gutter);
-  font-size: clamp(28px, 4.7vw, 47px);
+  font-size: clamp(32px, 4.4vw, 64px);
   font-weight: 900;
-  line-height: 1.3;
+  line-height: 1.1;
   color: var(--accent);
-  text-align: center;
   text-decoration: underline;
   text-underline-position: from-font;
 }
 
-/* A slow, constant heartbeat-like pulse — not scroll-tied — to keep
-   pulling the eye toward the invitation the whole time it's on screen. */
+/* A slow, constant heartbeat-like pulse to keep pulling the eye */
 @media (prefers-reduced-motion: no-preference) {
   .diveIn {
     animation: diveInPulse 3.6s ease-in-out infinite;
@@ -369,100 +474,36 @@
   }
 
   50% {
-    transform: scale(1.015);
+    transform: scale(1.03);
   }
 }
 
-/* ---------- automation note ---------- */
+/* ---------- automation note (dark split) ---------- */
 
 .automation {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px var(--gutter) 20px;
   background: var(--ink-dark);
   color: #ffffff;
 }
 
-.automationInner {
-  gap: 0;
-}
-
-.automationIntro {
-  width: 100%;
-  max-width: 800px;
-  padding-top: 100px;
-  /* Figma pulls the screenshot up under the copy */
-  margin-bottom: -34px;
-}
-
 .automationHeading {
   font-family: var(--font-levit), var(--font-inter), sans-serif;
-  font-size: clamp(24px, 3.4vw, 34px);
+  font-size: clamp(28px, 3.4vw, 52px);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
 /* The dark panel overrides the page-level muted body colour */
 .automationBody {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.78);
 }
 
-.automationShot {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 2828 / 1482;
-  overflow: hidden;
-}
-
-.automationShot img {
-  object-fit: cover;
-}
-
+/* Tablet & up: the same ~32px side margin as the split sections */
 @media (--tablet) {
-  .walkStep {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 76px;
-  }
-}
-
-@media (--desktop) {
-  .statementText {
-    line-height: 74px;
-  }
-
-  .diveIn {
-    line-height: 74px;
-  }
-
-  .hero {
-    padding: 0 0 160px;
-  }
-
-  .prose,
-  .walkthrough {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .researchShots,
-  .visual,
-  .statement,
-  .diveIn {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .automation {
-    padding-left: clamp(24px, 8.6vw, 110px);
-    padding-right: clamp(24px, 8.6vw, 110px);
-  }
-
-  .researchShots {
-    padding-top: 110px;
-    padding-bottom: 110px;
+  .hero,
+  .takeover,
+  .statement {
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }

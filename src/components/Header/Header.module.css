@@ -32,6 +32,7 @@
 }
 
 .navLink {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,16 +79,40 @@
   transition: opacity var(--dur-hover) var(--ease-out-cubic);
 }
 
+/* The active tab's black fill is a separate pill element (see Header.tsx)
+   so it can fly between tabs on navigation; the label sits above it. */
 .navLinkActive,
 .navLinkActive:hover {
-  background: var(--color-fg);
+  background: transparent;
   color: var(--color-bg);
 }
 
+.activePill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-fg);
+}
+
+.navLabel {
+  position: relative;
+}
+
 @media (--tablet) {
+  /* The nav floats (fixed, top: 24px) while the wordmark and Contact Me sit
+     in normal flow. Giving the pill an explicit height and making this row
+     exactly that tall, from the same 24px offset, puts all three on one
+     shared centre line. */
   .header {
+    --nav-h: 64px;
     justify-content: space-between;
-    padding: 24px 62px;
+    height: calc(24px + var(--nav-h));
+    padding: 24px 62px 0;
+  }
+
+  .nav {
+    height: var(--nav-h);
+    padding-block: 0;
   }
 
   .wordmark,

@@ -1,8 +1,91 @@
 .hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-liebling), var(--font-inter), sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1.25vw, 18px);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--color-fg);
   opacity: 1;
-  transition: opacity 300ms ease;
+  transition: opacity 300ms var(--ease-out-cubic);
 }
 
 .hidden {
   opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- arrow in a ring ---------- */
+/* The ring clips the arrow, so it can fall out of the bottom and drop back
+   in from the top — a little conveyor that says "keep going down". */
+.ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(36px, 3vw, 44px);
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: background-color var(--dur-hover) var(--ease-out-cubic),
+    color var(--dur-hover) var(--ease-out-cubic),
+    transform 300ms var(--ease-out-back);
+}
+
+.arrow {
+  width: 46%;
+  height: 46%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .arrow {
+    animation: arrow-drop 2s var(--ease-in-out-cubic) infinite;
+  }
+
+  .hint:active .ring {
+    transform: scale(0.9);
+    transition-duration: var(--dur-press);
+  }
+}
+
+@keyframes arrow-drop {
+  /* rest, then fall out of the ring with a little anticipation hop */
+  0%,
+  20% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-12%);
+  }
+  55% {
+    transform: translateY(170%);
+  }
+  /* teleport above the ring while it's clipped out of sight */
+  55.01% {
+    transform: translateY(-170%);
+  }
+  /* drop back in with a small overshoot-and-settle */
+  80% {
+    transform: translateY(8%);
+  }
+  90%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Hover fills the ring, like the active nav pill */
+@media (hover: hover) {
+  .hint:hover .ring {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+}
+
+.hint:focus-visible {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 6px;
+  border-radius: var(--radius-pill);
 }

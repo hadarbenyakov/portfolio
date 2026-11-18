@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { firstCaseStudyHref } from "@/data/projects";
 import styles from "./Header.module.css";
 
@@ -30,7 +31,23 @@ export default function Header({ active = "Home" }: { active?: string }) {
               className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
               aria-current={isActive ? "page" : undefined}
             >
-              {label}
+              {/* The black pill is its own element with a shared view-transition
+                  name, so on navigation it flies from the old tab to the new
+                  one (globals.css styles the flight). */}
+              {isActive && (
+                <ViewTransition name="nav-pill" share="nav-pill" default="none">
+                  <span className={styles.activePill} aria-hidden />
+                </ViewTransition>
+              )}
+              {/* Each label is its own view-transition layer, stacked above
+                  the flying pill, so it turns white as the pill arrives
+                  instead of popping in after the animation ends. */}
+              <span
+                className={`${styles.navLabel} nav-label-layer`}
+                style={{ viewTransitionName: `nav-label-${label.toLowerCase()}` }}
+              >
+                {label}
+              </span>
             </Link>
           );
         })}

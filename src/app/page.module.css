@@ -14,6 +14,10 @@
   padding: min(12.3vw, 186px) var(--gutter) min(18.4vw, 278px);
 }
 
+.heroInner {
+  margin-inline: auto;
+}
+
 /* Below tablet, the desktop frame's wide margin offsets push nowrap lines
    past the viewport edge — so mobile gets its own centred, wrapping
    composition instead of a scaled-down copy of the 1512 frame. */
@@ -21,7 +25,9 @@
   font-family: var(--font-levit), var(--font-inter), sans-serif;
   font-weight: 300;
   font-size: min(15vw, 194px);
-  line-height: 1.05;
+  /* Same tight leading at every size — Figma stacks the lines 148px apart
+     at 194px type (0.763em), and the stacked mobile version keeps it. */
+  line-height: 0.763;
   letter-spacing: var(--tracking-display);
   color: var(--color-fg);
   text-align: center;
@@ -73,28 +79,32 @@
   align-items: center;
 }
 
-.tagline,
-.scrollHint {
+.tagline {
   line-height: 1.1;
   letter-spacing: var(--tracking-display);
   text-align: center;
 }
 
-.scrollHint {
-  font-family: var(--font-levit), var(--font-inter), sans-serif;
-}
-
 .tagline {
-  margin-top: 16px;
+  /* Same title-to-tagline gap as desktop, in proportion to the title size */
+  margin-top: calc(min(15vw, 194px) * 0.141);
   font-family: var(--font-liebling), var(--font-inter), sans-serif;
   font-weight: 300;
   font-size: clamp(14px, 4vw, 34px);
 }
 
 @media (--tablet) {
-  .title {
+  .hero {
     /* 194px at the 1512 frame width */
-    font-size: min(12.83vw, 194px);
+    --hero-fs: min(12.83vw, 194px);
+  }
+
+  .heroInner {
+    width: fit-content;
+  }
+
+  .title {
+    font-size: var(--hero-fs);
     /* Figma stacks the three lines 148px apart at 194px type */
     line-height: 0.763;
     text-align: left;
@@ -105,19 +115,19 @@
     white-space: nowrap;
   }
 
-  /* Each line is nudged so its centre lands on the point Figma gives it,
-     solved against the line's own rendered width (margin-left is a % of
-     the content box, i.e. frame width minus the gutter on both sides) */
+  /* Figma's stagger, kept as offsets from the composition's own left edge
+     in units of the title size — so .heroInner can shrink-wrap the lines
+     and centre the whole block instead of it leaning right. */
   .line1 {
-    margin-left: 9.43%;
+    margin-left: 0;
   }
 
   .line2 {
-    margin-left: 30.61%;
+    margin-left: calc(var(--hero-fs) * 1.1577);
   }
 
   .line3 {
-    margin-left: 14.29%;
+    margin-left: calc(var(--hero-fs) * 0.2656);
   }
 
   /* 34px at the 1512 frame width.
@@ -126,37 +136,25 @@
   .tagline {
     align-self: flex-start;
     width: fit-content;
-    margin: calc(min(1.5vw, 24px) + 4px) 0 0 30.61%;
+    margin: calc(min(1.5vw, 24px) + 4px) 0 0 calc(var(--hero-fs) * 1.1577);
     font-size: clamp(14px, 2.25vw, 34px);
   }
 }
 
-/* Pinned to the bottom of the viewport so it's visible the moment you
-   land on the page, with a gentle up/down float to draw the eye. */
+/* Pinned to the bottom-right of the viewport so it's visible the moment
+   you land on the page (ScrollHint.module.css has the arrow and motion). */
 .scrollHint {
   position: fixed;
-  left: 50%;
+  right: var(--gutter);
   bottom: min(4vw, 40px);
   z-index: 5;
-  transform: translateX(-50%);
-  font-weight: 400;
-  font-size: clamp(12px, 1.6vw, 24px);
-  animation: scrollHintFloat 2.4s ease-in-out infinite;
 }
 
-@keyframes scrollHintFloat {
-  0%,
-  100% {
-    transform: translate(-50%, 0);
-  }
-  50% {
-    transform: translate(-50%, -10px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
+/* On phones the first project card is already in view on load, so the
+   hint would just sit on top of it — leave it out below tablet. */
+@media (max-width: 767px) {
   .scrollHint {
-    animation: none;
+    display: none;
   }
 }
 

@@ -1,0 +1,113 @@
+/* ---------- phones: text → media pairs ---------- */
+
+.story {
+  --story-gap: clamp(32px, 4vw, 64px);
+  /* Room the floating nav takes at the top of the viewport */
+  --story-top: 112px;
+  padding: 0 var(--gutter);
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding-block: 64px;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inlineMedia {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- tablet & desktop: pinned media, scrolling text ---------- */
+
+/* Near edge-to-edge: a 32px margin each side and no max-width cap, with
+   the media column getting the larger share of the width. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  gap: var(--story-gap);
+  padding: 0 32px;
+}
+
+.split .texts {
+  gap: 0;
+  padding-block: 0;
+}
+
+/* Run-out after the last beat: the media stays pinned while the final text
+   keeps scrolling up to the top of the screen, and only then does the
+   section hand over to the next one. */
+.split.runOut .texts::after {
+  content: "";
+  height: max(0px, calc(50vh - 200px));
+}
+
+/* Each beat gets roughly a screen of scroll, text centred in it, so the
+   media has time to be looked at before the next swap. */
+.split .step {
+  justify-content: center;
+  /* Exactly one screen per beat, matching the pinned stage, so the stage is
+     already locked in place when the first text reaches the middle. */
+  min-height: 100vh;
+  padding-block: 14vh;
+}
+
+.split .stepContent {
+  opacity: 0.28;
+  transition: opacity 500ms var(--ease-out-cubic);
+}
+
+.split .stepActive .stepContent {
+  opacity: 1;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.stageItem {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--story-top) 0 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 450ms var(--ease-out-cubic), transform 650ms var(--ease-out-quint);
+}
+
+.stageActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Upcoming media waits a little below, past media drifts a little above,
+   so each swap reads as the story moving down the page. */
+@media (prefers-reduced-motion: no-preference) {
+  .stageItem {
+    transform: translateY(40px) scale(0.97);
+  }
+
+  .stagePast {
+    transform: translateY(-40px) scale(0.97);
+  }
+
+  .stageActive {
+    transform: none;
+  }
+}

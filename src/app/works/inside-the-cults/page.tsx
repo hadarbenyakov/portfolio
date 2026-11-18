@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
+import { Orbit } from "next/font/google";
 import Image from "next/image";
 import DeviceVideo from "@/components/DeviceVideo/DeviceVideo";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import ProjectNav from "@/components/ProjectNav/ProjectNav";
+import SplitStory from "@/components/SplitStory/SplitStory";
 import styles from "./page.module.css";
 
 const A = "/projects/cults";
+
+/* Orbit is the project's tertiary face (free on Google Fonts); the two
+   commercial display faces are shown as rendered specimen images instead
+   of being shipped as web fonts. */
+const orbit = Orbit({ weight: "400", subsets: ["latin"] });
+
+const PALETTE = ["#F80000", "#000000", "#FFFFFF"];
 
 export const metadata: Metadata = {
   title: "Inside The Cults — Hadar Ben Yaakov",
@@ -61,7 +70,7 @@ const WALKTHROUGH = [
   },
   {
     file: "phone-deep-dive.mp4",
-    title: "Deeper Dive into the Cult",
+    title: "Deeper Dive",
     body: "Uncover the cult itself, its members, and detailed information about life inside it, including years of activity, beliefs, and stages of control and more.",
   },
 ];
@@ -103,158 +112,223 @@ export default function InsideTheCultsPage() {
           </div>
         </section>
 
-        <section className={`${styles.prose} reveal`}>
-          <p className={styles.body}>
-            An experiential platform created as part of an Emotional Design
-            course.
-            <br />
-            The project explores the psychological and emotional mechanisms
-            behind cult dynamics, translating in depth research into an
-            immersive digital narrative.
-          </p>
+        <SplitStory
+          steps={[
+            {
+              id: "about",
+              content: (
+                <>
+                  <h2 className={styles.heading}>About</h2>
+                  <p className={styles.body}>
+                    The project explores the psychological and emotional
+                    mechanisms behind cult dynamics, translating in depth
+                    research into an immersive digital narrative.
+                  </p>
+                </>
+              ),
+              media: (
+                <div className={styles.frameWide}>
+                  <DeviceVideo src={`${A}/overview.mp4`} label="Platform overview recording" />
+                </div>
+              ),
+            },
+            {
+              id: "research",
+              content: (
+                <>
+                  <h2 className={styles.heading}>Research</h2>
+                  <p className={styles.body}>
+                    I began this project with in-depth research into cults,
+                    exploring a wide range of types and structures. As I read
+                    and analyzed different cases, it became clear that each
+                    cult has its own distinct character and internal logic.
+                  </p>
+                </>
+              ),
+              media: (
+                <div className={styles.researchShots}>
+                  {RESEARCH_SHOTS.map(({ src, w, h, crop }, i) => (
+                    <div
+                      className={styles.shot}
+                      key={src}
+                      style={{ flex: `${w} 1 0`, aspectRatio: `${w} / ${h}` }}
+                    >
+                      <div
+                        className={styles.cropInner}
+                        style={{
+                          left: crop.left ?? 0,
+                          top: crop.top ?? 0,
+                          width: crop.width ?? "100%",
+                          height: crop.height ?? "100%",
+                        }}
+                      >
+                        <Image
+                          src={`${A}/${src}`}
+                          alt={`Cult research reference ${i + 1}`}
+                          fill
+                          sizes="(min-width: 768px) 240px, 33vw"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ),
+            },
+          ]}
+        />
 
-          <div className={styles.block}>
-            <h2 className={`${styles.heading} reveal-heading`}>Research</h2>
-            <p className={styles.body}>
-              I began this project with in-depth research into cults, exploring
-              a wide range of types and structures. As I read and analyzed
-              different cases, it became clear that each cult has its own
-              distinct character and internal logic.
-            </p>
-          </div>
-        </section>
-
-        <section className={styles.researchShots}>
-          {RESEARCH_SHOTS.map(({ src, w, h, crop }, i) => (
-            <div
-              className={`${styles.shot} ${i % 2 === 0 ? "reveal-left" : "reveal-right"}`}
-              key={src}
-              style={{ flex: `${w} 1 0`, aspectRatio: `${w} / ${h}` }}
-            >
-              <div
-                className={styles.cropInner}
-                style={{
-                  left: crop.left ?? 0,
-                  top: crop.top ?? 0,
-                  width: crop.width ?? "100%",
-                  height: crop.height ?? "100%",
-                }}
-              >
-                <Image
-                  src={`${A}/${src}`}
-                  alt={`Cult research reference ${i + 1}`}
-                  fill
-                  sizes="(min-width: 1280px) 349px, 33vw"
-                />
-              </div>
-            </div>
-          ))}
-        </section>
-
-        <section className={`${styles.visual} reveal`}>
-          <div className={`${styles.block} ${styles.visualIntro}`}>
-            <h2 className={`${styles.heading} reveal-heading`}>Visual Language</h2>
-            <p className={styles.body}>
+        {/* Long copy takes the whole screen, then the split resumes */}
+        <section className={`${styles.takeover} ${styles.bleed}`}>
+          <div className={styles.takeoverInner}>
+            <h2 className={`${styles.takeoverHeading} reveal-heading`}>Visual Language</h2>
+            <p className={`${styles.takeoverText} reveal`}>
               The visual language is built around pixelation as both a graphic
               system and a conceptual framework. By deconstructing portraits of
               cult leaders into individual pixels, the design exposes the gap
               between the constructed image and the person behind it, a leader
               whose presence exists only through the collective belief of
-              followers. This principle guided every design decision, from the
-              typography and layout to the interaction model, creating a
-              cohesive visual system where form and meaning are inseparable.
+              followers.
             </p>
-          </div>
 
-          <div className={styles.portraits}>
-            {PORTRAITS.map(({ png, svg, label }) => (
-              <div className={styles.portrait} key={png}>
-                <Image
-                  className={styles.portraitPhoto}
-                  src={`${A}/${png}`}
-                  alt={label}
-                  fill
-                  sizes="280px"
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className={styles.portraitSvg}
-                  src={`${A}/${svg}`}
-                  alt=""
-                  aria-hidden="true"
-                />
+            {/* The project's style sheet: palette + typefaces */}
+            <div className={`${styles.styleGuide} reveal`}>
+              <div className={styles.guideCol}>
+                <h3 className={styles.guideLabel}>Colors</h3>
+                <ul className={styles.swatches}>
+                  {PALETTE.map((hex) => (
+                    <li className={styles.swatchRow} key={hex}>
+                      <span className={styles.swatch} style={{ background: hex }} aria-hidden />
+                      <span>{hex}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
-          </div>
 
-          <div className={styles.overview}>
-            <DeviceVideo
-              src={`${A}/overview.mp4`}
-              label="Platform overview recording"
-            />
+              <div className={styles.guideCol}>
+                <h3 className={styles.guideLabel}>Fonts</h3>
+                <Image
+                  className={styles.fontAmbivalenti}
+                  src={`${A}/font-ambivalenti-ink.png`}
+                  alt="Ambivalenti"
+                  width={2014}
+                  height={140}
+                  sizes="(min-width: 768px) 520px, 90vw"
+                />
+                <Image
+                  className={styles.fontArbel}
+                  src={`${A}/font-arbel-hagilda-ink.png`}
+                  alt="Arbel Hagilda"
+                  width={970}
+                  height={132}
+                  sizes="260px"
+                />
+                <span className={`${styles.fontOrbit} ${orbit.className}`}>Orbit</span>
+              </div>
+            </div>
+
+            <div className={styles.portraits}>
+              {PORTRAITS.map(({ png, svg, label }) => (
+                <div className={styles.portrait} key={png}>
+                  <Image
+                    className={styles.portraitPhoto}
+                    src={`${A}/${png}`}
+                    alt={label}
+                    fill
+                    sizes="280px"
+                  />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={styles.portraitSvg}
+                    src={`${A}/${svg}`}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <p className={styles.portraitHint}>
+              <span className={styles.hintHover}>
+                Hover over the portraits to reveal the pixels behind them
+              </span>
+              <span className={styles.hintTap}>
+                Tap the portraits to reveal the pixels behind them
+              </span>
+            </p>
           </div>
         </section>
 
-        <section className={`${styles.statement} reveal`}>
+        <section className={`${styles.statement} ${styles.bleed}`}>
           <p className={styles.statementText}>
             This platform invites you to dive into the hidden world of cults.
           </p>
         </section>
 
-        <section className={`${styles.walkthrough} reveal`}>
-          {WALKTHROUGH.map(({ file, title, body }) => (
-            <div className={styles.walkStep} key={file}>
-              <div className={styles.walkPhone}>
-                <DeviceVideo
-                  src={`${A}/${file}`}
-                  label={`${title} recording`}
-                />
+        <SplitStory
+          steps={WALKTHROUGH.map(({ file, title, body }, i) => ({
+            id: file,
+            content: (
+              <>
+                <h3 className={styles.heading}>{title}</h3>
+                <p className={styles.body}>{body}</p>
+                {i === WALKTHROUGH.length - 1 && (
+                  <a
+                    className={styles.diveIn}
+                    href={DIVE_IN_PROTOTYPE}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Dive In
+                  </a>
+                )}
+              </>
+            ),
+            media: (
+              <div className={styles.framePhone}>
+                <DeviceVideo src={`${A}/${file}`} label={`${title} recording`} />
               </div>
-              <div className={styles.walkCaption}>
-                <h3 className={styles.walkTitle}>{title}</h3>
-                <p className={styles.walkBody}>{body}</p>
-              </div>
-            </div>
-          ))}
-        </section>
+            ),
+          }))}
+        />
 
-        <a
-          className={styles.diveIn}
-          href={DIVE_IN_PROTOTYPE}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Dive In
-        </a>
-
-        <section className={`${styles.automation} ${styles.bleed} reveal`}>
-          <div className={styles.automationInner}>
-            <div className={`${styles.block} ${styles.automationIntro}`}>
-              <h2 className={`${styles.automationHeading} reveal-heading`}>Can I Just AI This?</h2>
-              <div className={`${styles.body} ${styles.automationBody}`}>
-                <p>
-                  As I built the site, I felt there was one task that come back
-                  again and again: taking images, cropping them to the right
-                  dimensions, compressing, saving in different formats.
-                </p>
-                <p>
-                  So instead of doing it manually every time, I built a small
-                  automation in Webflow using AI image processing. Now when I
-                  need to add visuals to the site, the heavy lifting happens
-                  automatically.
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.automationShot}>
-              <Image
-                src={`${A}/ai-automation.png`}
-                alt="AI image automation in Webflow"
-                fill
-                sizes="(min-width: 1280px) 1060px, 100vw"
-              />
-            </div>
-          </div>
+        <section className={`${styles.automation} ${styles.bleed}`}>
+          <SplitStory
+            runOut={false}
+            steps={[
+              {
+                id: "automation",
+                content: (
+                  <>
+                    <h2 className={styles.automationHeading}>Can I Just AI This?</h2>
+                    <div className={`${styles.body} ${styles.automationBody}`}>
+                      <p>
+                        As I built the site, I felt there was one task that
+                        come back again and again: taking images, cropping
+                        them to the right dimensions, compressing, saving in
+                        different formats.
+                      </p>
+                      <p>
+                        So instead of doing it manually every time, I built a
+                        small automation in Webflow using AI image processing.
+                        Now when I need to add visuals to the site, the heavy
+                        lifting happens automatically.
+                      </p>
+                    </div>
+                  </>
+                ),
+                media: (
+                  <div className={styles.frameShot}>
+                    <Image
+                      src={`${A}/ai-automation.png`}
+                      alt="AI image automation in Webflow"
+                      fill
+                      sizes="(min-width: 768px) 60vw, 100vw"
+                    />
+                  </div>
+                ),
+              },
+            ]}
+          />
         </section>
       </main>
 

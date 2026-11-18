@@ -12,16 +12,21 @@ export default function Home() {
 
       <main className={styles.main}>
         <section className={styles.hero}>
-          <h1 className={styles.title}>
-            <span className={`${styles.line} ${styles.line1}`}>HEY, I&rsquo;M</span>
-            <span className={`${styles.line} ${styles.line2}`}>HADAR</span>
-            <span className={`${styles.line} ${styles.line3}`}>BEN YAAKOV</span>
-          </h1>
+          {/* Shrink-wraps the staggered lines so the composition as a whole
+              can be centred on the page */}
+          <div className={styles.heroInner}>
+            <h1 className={styles.title}>
+              <span className={`${styles.line} ${styles.line1}`}>HEY, I&rsquo;M</span>
+              <span className={`${styles.line} ${styles.line2}`}>HADAR</span>
+              <span className={`${styles.line} ${styles.line3}`}>BEN YAAKOV</span>
+            </h1>
 
-          <div className={styles.heroMeta}>
-            <p className={styles.tagline}>PRODUCT DESIGNER BASED IN TEL AVIV</p>
-            <ScrollHint className={styles.scrollHint} />
+            <div className={styles.heroMeta}>
+              <p className={styles.tagline}>PRODUCT DESIGNER BASED IN TEL AVIV</p>
+            </div>
           </div>
+
+          <ScrollHint className={styles.scrollHint} targetId="works" />
         </section>
 
         <section className={styles.works} id="works">

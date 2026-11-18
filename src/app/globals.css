@@ -305,3 +305,76 @@ img {
     transform: translateX(0);
   }
 }
+
+/* ---------- nav pill flight between pages ---------- */
+/* Header.tsx names the active tab's pill "nav-pill"; on navigation React
+   pairs the old page's pill with the new one and the browser flies it
+   across. A bouncy curve plus a squash-and-stretch mid-flight makes it
+   read like a blob of jelly hopping to the next tab. */
+::view-transition-group(.nav-pill) {
+  animation-duration: 560ms;
+  animation-timing-function: var(--ease-out-back);
+  z-index: 20;
+}
+
+::view-transition-image-pair(.nav-pill) {
+  animation: nav-pill-squash 560ms var(--ease-in-out-cubic) both;
+}
+
+/* The snapshots are just the plain black pill, so no cross-fade is needed */
+::view-transition-old(.nav-pill) {
+  display: none;
+}
+
+::view-transition-new(.nav-pill) {
+  animation: none;
+}
+
+@keyframes nav-pill-squash {
+  0% {
+    transform: scale(1, 1);
+  }
+  35% {
+    transform: scale(1.18, 0.78);
+  }
+  65% {
+    transform: scale(0.94, 1.08);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+/* Tab labels ride above the flying pill and cross-fade their colour
+   (dark ↔ white) quickly, timed to the pill's arrival. The class is set
+   here, globally, because CSS Modules would hash a view-transition-class
+   written in Header.module.css and these rules would never match. */
+.nav-label-layer {
+  view-transition-class: nav-label;
+}
+
+::view-transition-group(.nav-label) {
+  z-index: 21;
+  animation-duration: 0s;
+}
+
+::view-transition-old(.nav-label),
+::view-transition-new(.nav-label) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-out-cubic);
+}
+
+/* Clicks during a transition go straight through to the live page */
+::view-transition {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
