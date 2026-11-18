@@ -19,7 +19,7 @@
   background: var(--accent);
 }
 
-/* No width cap: sections run near edge-to-edge with a ~32px side margin */
+/* No width cap: sections use the footer's side margins */
 .main {
   margin: 0 auto;
 }
@@ -631,12 +631,21 @@
   color: rgba(255, 255, 255, 0.78);
 }
 
-/* Tablet & up: the same ~32px side margin as the split sections */
+/* Side margins match the footer: 80px on tablet, the page gutter on desktop */
 @media (--tablet) {
   .hero,
   .takeover,
   .statement {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+@media (--desktop) {
+  .hero,
+  .takeover,
+  .statement {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
   }
 }

@@ -33,13 +33,19 @@
 
 /* ---------- tablet & desktop: pinned media, scrolling text ---------- */
 
-/* Near edge-to-edge: a 32px margin each side and no max-width cap, with
-   the media column getting the larger share of the width. */
+/* Side margins match the footer (80px on tablet, the page gutter on
+   desktop), no max-width cap, and the media column gets the larger share. */
 .split {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
   gap: var(--story-gap);
-  padding: 0 32px;
+  padding: 0 80px;
+}
+
+@media (--desktop) {
+  .split {
+    padding: 0 var(--gutter);
+  }
 }
 
 .split .texts {
