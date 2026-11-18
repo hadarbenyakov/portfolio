@@ -97,17 +97,68 @@
 }
 
 /* Upcoming media waits a little below, past media drifts a little above,
-   so each swap reads as the story moving down the page. */
+   so each swap reads as the story moving down the page. On top of that the
+   incoming media is wiped up from the bottom edge and the outgoing one is
+   wiped away through the top — the frame itself "rises" into place. */
 @media (prefers-reduced-motion: no-preference) {
   .stageItem {
-    transform: translateY(40px) scale(0.97);
+    transform: translateY(48px) scale(0.96);
+    clip-path: inset(100% 0 0 0);
+    transition: opacity 450ms var(--ease-out-cubic), transform 800ms var(--ease-out-quint),
+      clip-path 900ms var(--ease-out-quint);
   }
 
   .stagePast {
-    transform: translateY(-40px) scale(0.97);
+    transform: translateY(-48px) scale(0.96);
+    clip-path: inset(0 0 100% 0);
   }
 
   .stageActive {
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Text beats: each line rises into place one after another as its beat
+     becomes active, and sinks back slightly when it hands over. */
+  .split .stepContent > * {
+    transform: translateY(22px);
+    transition: transform 800ms var(--ease-out-quint);
+  }
+
+  .split .stepActive .stepContent > * {
+    transform: none;
+  }
+
+  .split .stepActive .stepContent > :nth-child(2) {
+    transition-delay: 70ms;
+  }
+
+  .split .stepActive .stepContent > :nth-child(3) {
+    transition-delay: 140ms;
+  }
+
+  .split .stepActive .stepContent > :nth-child(n + 4) {
+    transition-delay: 210ms;
+  }
+
+  /* Phones: no pinned stage, so each text and its media rise in as they
+     scroll into view (scroll-driven, no JS). */
+  .story:not(.split) .stepContent,
+  .story:not(.split) .inlineMedia {
+    animation: story-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+}
+
+@keyframes story-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
     transform: none;
   }
 }

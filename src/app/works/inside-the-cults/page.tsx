@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { Orbit } from "next/font/google";
 import Image from "next/image";
 import DeviceVideo from "@/components/DeviceVideo/DeviceVideo";
@@ -16,6 +17,11 @@ const A = "/projects/cults";
 const orbit = Orbit({ weight: "400", subsets: ["latin"] });
 
 const PALETTE = ["#F80000", "#000000", "#FFFFFF"];
+
+/* Block sizes (px) for the title's pixelate-in, coarse → fine */
+const PIXEL_STEPS = [28, 18, 11, 6, 3];
+
+const STATEMENT = "This platform invites you to dive into the hidden world of cults.";
 
 export const metadata: Metadata = {
   title: "Inside The Cults — Hadar Ben Yaakov",
@@ -87,7 +93,29 @@ export default function InsideTheCultsPage() {
         <section className={`${styles.hero} ${styles.bleed}`}>
           <div className={styles.heroInner}>
             <div className={styles.heroHeading}>
-              <h1 className={`${styles.title} hero-title-in`}>Inside The Cults</h1>
+              {/* SVG pixelate filters: each samples one point per block and fills
+                  the block with it. The title steps through them, coarse to
+                  fine, echoing the project's pixelated portraits. */}
+              <svg className={styles.pixelDefs} aria-hidden focusable="false">
+                {PIXEL_STEPS.map((b) => (
+                  <filter
+                    key={b}
+                    id={`cults-px-${b}`}
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    colorInterpolationFilters="sRGB"
+                  >
+                    <feFlood x={b / 2} y={b / 2} width="1" height="1" />
+                    <feComposite width={b} height={b} />
+                    <feTile result="grid" />
+                    <feComposite in="SourceGraphic" in2="grid" operator="in" />
+                    <feMorphology operator="dilate" radius={b / 2} />
+                  </filter>
+                ))}
+              </svg>
+              <h1 className={`${styles.title} ${styles.titlePixelate}`}>Inside The Cults</h1>
               <p className={styles.tagline}>
                 An experiential platform that invites users to dive into the
                 hidden world of cults.
@@ -195,8 +223,12 @@ export default function InsideTheCultsPage() {
               <div className={styles.guideCol}>
                 <h3 className={styles.guideLabel}>Colors</h3>
                 <ul className={styles.swatches}>
-                  {PALETTE.map((hex) => (
-                    <li className={styles.swatchRow} key={hex}>
+                  {PALETTE.map((hex, i) => (
+                    <li
+                      className={styles.swatchRow}
+                      key={hex}
+                      style={{ "--i": i } as CSSProperties}
+                    >
                       <span className={styles.swatch} style={{ background: hex }} aria-hidden />
                       <span>{hex}</span>
                     </li>
@@ -259,8 +291,17 @@ export default function InsideTheCultsPage() {
         </section>
 
         <section className={`${styles.statement} ${styles.bleed}`}>
+          {/* Each word rises in turn as the red screen scrolls into view */}
           <p className={styles.statementText}>
-            This platform invites you to dive into the hidden world of cults.
+            {STATEMENT.split(" ").map((word, i) => (
+              <span
+                key={i}
+                className={styles.statementWord}
+                style={{ "--i": i } as CSSProperties}
+              >
+                {word}{" "}
+              </span>
+            ))}
           </p>
         </section>
 

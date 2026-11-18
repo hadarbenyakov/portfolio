@@ -66,6 +66,55 @@
   letter-spacing: var(--tracking-display);
 }
 
+/* Zero-size holder for the title's SVG filters */
+.pixelDefs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* The title resolves from coarse pixel blocks to sharp type in five
+   discrete steps (filter url()s don't interpolate, so each keyframe is a
+   hard cut — like an image loading at rising resolution). */
+@media (prefers-reduced-motion: no-preference) {
+  .titlePixelate {
+    animation: title-pixelate 1.2s linear 0.15s both;
+  }
+}
+
+@keyframes title-pixelate {
+  0% {
+    opacity: 0;
+    filter: url(#cults-px-28);
+  }
+
+  8% {
+    opacity: 1;
+    filter: url(#cults-px-28);
+  }
+
+  26% {
+    filter: url(#cults-px-18);
+  }
+
+  44% {
+    filter: url(#cults-px-11);
+  }
+
+  62% {
+    filter: url(#cults-px-6);
+  }
+
+  80% {
+    filter: url(#cults-px-3);
+  }
+
+  100% {
+    filter: none;
+  }
+}
+
 .tagline {
   font-size: clamp(18px, 1.8vw, 26px);
   font-weight: 500;
@@ -101,6 +150,29 @@
   height: calc(40 / 3234 * 100cqw);
   border-radius: 1.1cqw 1.1cqw 0 0;
   background: rgb(24 25 25);
+}
+
+/* On load the laptop rises in just after the title, then the link */
+@media (prefers-reduced-motion: no-preference) {
+  .heroMedia {
+    animation: hero-rise 1s var(--ease-out-quint) 0.25s both;
+  }
+
+  .prototypeLink {
+    animation: hero-rise 0.8s var(--ease-out-quint) 0.55s both;
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(48px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .prototypeLink {
@@ -311,6 +383,58 @@
   }
 }
 
+/* Swatches pop in one by one, then the three typefaces slide up in turn */
+@media (prefers-reduced-motion: no-preference) {
+  .swatchRow {
+    animation: swatch-pop linear both;
+    animation-timeline: view();
+    animation-range: entry calc(20% + var(--i) * 14%) entry calc(55% + var(--i) * 14%);
+  }
+
+  .fontAmbivalenti,
+  .fontArbel,
+  .fontOrbit {
+    animation: font-rise linear both;
+    animation-timeline: view();
+  }
+
+  .fontAmbivalenti {
+    animation-range: entry 10% entry 60%;
+  }
+
+  .fontArbel {
+    animation-range: entry 25% entry 75%;
+  }
+
+  .fontOrbit {
+    animation-range: entry 40% entry 90%;
+  }
+}
+
+@keyframes swatch-pop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes font-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* "Hover…" for mouse users, "Tap…" on touch screens */
 .portraitHint {
   margin-top: 0;
@@ -421,28 +545,37 @@
   letter-spacing: var(--tracking-display);
 }
 
-/* A single overshooting "breath" as the line scrolls in, rather than a
-   flat fade — a little unsettling, which fits the subject. */
+/* The red screen is its own view timeline; each word rises out of a blur
+   one after another as it scrolls in (staggered by --i along the timeline,
+   finishing by the time the statement is centred). */
+.statement {
+  view-timeline-name: --statement;
+}
+
+.statementWord {
+  display: inline-block;
+  white-space: pre;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .statementText {
-    animation-name: statementBreathe;
-    animation-duration: 0.7s;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    animation-fill-mode: both;
-    animation-timeline: view();
-    animation-range: entry 10% entry 60%;
+  .statementWord {
+    animation: word-rise linear both;
+    animation-timeline: --statement;
+    animation-range: cover calc(8% + var(--i) * 2.6%) cover calc(22% + var(--i) * 2.6%);
   }
 }
 
-@keyframes statementBreathe {
+@keyframes word-rise {
   from {
     opacity: 0;
-    transform: scale(0.94);
+    filter: blur(6px);
+    transform: translateY(0.45em);
   }
 
   to {
     opacity: 1;
-    transform: scale(1);
+    filter: blur(0);
+    transform: none;
   }
 }
 
