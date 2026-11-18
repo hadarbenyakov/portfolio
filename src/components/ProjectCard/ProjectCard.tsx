@@ -4,9 +4,12 @@ import { hasPublicAsset } from "@/lib/assets";
 import type { Project } from "@/data/projects";
 import styles from "./ProjectCard.module.css";
 
+const IMAGE_SIZES = "(min-width: 1024px) 582px, 100vw";
+
 export default function ProjectCard({
   title,
   image,
+  video,
   tags,
   href,
   index = 0,
@@ -17,13 +20,26 @@ export default function ProjectCard({
     <>
       <div className={styles.imageWrap}>
         {hasPublicAsset(image) ? (
-          <Image
-            className={styles.image}
-            src={image}
-            alt={title}
-            fill
-            sizes="(min-width: 1024px) 582px, 100vw"
-          />
+          <>
+            <Image
+              className={styles.image}
+              src={image}
+              alt={title}
+              fill
+              sizes={IMAGE_SIZES}
+            />
+            {video && hasPublicAsset(video) && (
+              <video
+                className={styles.video}
+                src={video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-hidden
+              />
+            )}
+          </>
         ) : (
           <div className={styles.placeholder} role="img" aria-label={title}>
             {title}
@@ -41,7 +57,7 @@ export default function ProjectCard({
 
   return (
     <article className={`${styles.card} ${revealClass}`}>
-      <Link className={styles.link} href={href}>
+      <Link className={styles.link} href={href} data-cursor="view">
         {body}
       </Link>
     </article>

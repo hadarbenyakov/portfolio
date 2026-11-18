@@ -20,7 +20,7 @@ export default function Footer({ variant = "default" }: FooterProps) {
         <nav className={styles.links} aria-label="Social">
           {isAbout && (
             <a
-              className={`${styles.link} ${styles.underlined}`}
+              className={`${styles.link} link-underline`}
               href={CV}
               target="_blank"
               rel="noopener noreferrer"
@@ -31,24 +31,24 @@ export default function Footer({ variant = "default" }: FooterProps) {
           {isAbout ? (
             <>
               <a
-                className={`${styles.link} ${styles.underlined}`}
+                className={`${styles.link} link-underline`}
                 href={LINKEDIN}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 LinkedIn
               </a>
-              <a className={styles.link} href={`mailto:${EMAIL}`}>
+              <a className={`${styles.link} link-underline-grow`} href={`mailto:${EMAIL}`}>
                 {EMAIL}
               </a>
             </>
           ) : (
             <>
-              <a className={styles.link} href={`mailto:${EMAIL}`}>
+              <a className={`${styles.link} link-underline-grow`} href={`mailto:${EMAIL}`}>
                 {EMAIL}
               </a>
               <a
-                className={`${styles.link} ${styles.underlined}`}
+                className={`${styles.link} link-underline`}
                 href={LINKEDIN}
                 target="_blank"
                 rel="noopener noreferrer"

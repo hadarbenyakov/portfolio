@@ -36,7 +36,7 @@ export default function Header({ active = "Home" }: { active?: string }) {
         })}
       </nav>
 
-      <a className={styles.contact} href={CONTACT_HREF}>
+      <a className={`${styles.contact} link-underline`} href={CONTACT_HREF}>
         Contact Me
       </a>
     </header>

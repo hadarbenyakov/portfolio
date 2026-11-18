@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import CustomCursor from "@/components/CustomCursor/CustomCursor";
 import "./globals.css";
 
 const inter = Inter({
@@ -44,7 +45,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${clashGrotesk.variable} ${levit1950.variable} ${lieblingPro.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {/* Lives in the root layout so it persists across every page and
+            client-side navigation (it re-colours itself per case study). */}
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

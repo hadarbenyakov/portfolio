@@ -1,0 +1,134 @@
+/* True "x-ray" cursor: mix-blend-mode reads the actual pixel underneath it,
+   so it reacts to glyph strokes and text selections, not just element
+   bounding boxes. The background below is the exact inverse of the brand
+   orange (--color-accent) so that difference-blending against a white page gives
+   back that same orange, pixel for pixel — and against black text (or any
+   dark fill, including a text selection) it flips to a vivid blue instead.
+   No wrapping element here on purpose: a parent with its own transform,
+   opacity or filter would create a stacking context that isolates the
+   blend from the real page content behind it. */
+
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-accent-inverse);
+  mix-blend-mode: difference;
+  opacity: 0;
+  pointer-events: none;
+  /* `scale` composes with the inline `translate` (the follow position)
+     without scaling the offset — see CustomCursor.tsx tick(). */
+  transition: opacity 200ms var(--ease-out-cubic), scale 350ms var(--ease-out-quint);
+}
+
+.visible {
+  opacity: 1;
+}
+
+/* ---------- hover: x-ray dot hands over to a solid orange twin ----------
+   Over anything clickable (nav, links, project cards) the x-ray switches
+   off. Rather than flipping mix-blend-mode on one element, the x-ray dot
+   fades out and a separate, always-solid orange dot fades in — both swell
+   together, so it reads as one dot changing colour. */
+.solid {
+  mix-blend-mode: normal;
+  /* Brand orange by default; a case study sets its own --cursor-color */
+  background: var(--cursor-color, var(--color-accent));
+  /* Smooths the per-background colour swap (e.g. black → red on Cults) */
+  transition: opacity 200ms var(--ease-out-cubic), scale 350ms var(--ease-out-quint),
+    background-color 200ms var(--ease-out-cubic);
+}
+
+.visible.solid {
+  opacity: 0;
+}
+
+.visible.hovering {
+  scale: 1.8;
+}
+
+.visible.hovering:not(.solid) {
+  opacity: 0;
+}
+
+.visible.hovering.solid {
+  opacity: 1;
+}
+
+/* Case-study pages: no x-ray at all — the solid twin is always the one
+   shown, in the project's colour, and still swells over links. */
+.visible.solidMode:not(.solid) {
+  opacity: 0;
+}
+
+.visible.solidMode.solid {
+  opacity: 1;
+}
+
+/* Over a project card both give way to the "View" bubble */
+.visible.hidden {
+  opacity: 0;
+  scale: 0;
+}
+
+/* ---------- "View" bubble over project cards ---------- */
+.label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #fff;
+  pointer-events: none;
+  scale: 0;
+  rotate: -25deg;
+  transition: scale 300ms var(--ease-in-cubic, ease-in), rotate 300ms ease-in;
+}
+
+.labelOn {
+  scale: 1;
+  rotate: 0deg;
+  transition: scale 500ms var(--ease-out-back), rotate 500ms var(--ease-out-back);
+}
+
+.labelText {
+  font-family: var(--font-levit), var(--font-inter), sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (hover: none), (max-width: 1279px) {
+  .dot,
+  .label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    transition: opacity 150ms ease;
+  }
+
+  /* Still signals "clickable", just without the swelling motion */
+  .visible.hovering {
+    scale: 1.6;
+  }
+
+  .label,
+  .labelOn {
+    rotate: 0deg;
+    transition: scale 150ms ease;
+  }
+}

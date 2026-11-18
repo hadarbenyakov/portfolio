@@ -42,7 +42,15 @@
   line-height: 1.45;
   letter-spacing: -0.005em;
   white-space: nowrap;
-  transition: background-color 150ms ease, color 150ms ease;
+  transition: background-color var(--dur-hover) var(--ease-out-cubic),
+    color var(--dur-hover) var(--ease-out-cubic),
+    transform var(--dur-press) var(--ease-out-cubic);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navLink:active {
+    transform: scale(0.95);
+  }
 }
 
 @media (--tablet) {
@@ -55,8 +63,19 @@
   }
 }
 
-.navLink:hover {
-  background: var(--color-divider);
+/* Gated to real hover devices so a tap on mobile doesn't leave a stuck grey pill */
+@media (hover: hover) {
+  .navLink:hover {
+    background: var(--color-divider);
+  }
+
+  .wordmark:hover {
+    opacity: 0.55;
+  }
+}
+
+.wordmark {
+  transition: opacity var(--dur-hover) var(--ease-out-cubic);
 }
 
 .navLinkActive,
@@ -88,7 +107,5 @@
     font-weight: 500;
     line-height: 1.45;
     letter-spacing: -0.005em;
-    text-decoration: underline;
-    text-underline-position: from-font;
   }
 }

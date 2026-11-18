@@ -3,6 +3,8 @@ export type Project = {
   title: string;
   year: string;
   image: string;
+  /** Looping muted clip crossfaded in over `image` on hover (home card only). */
+  video?: string;
   /** Keyword chips shown on the home card instead of a description. */
   tags?: string[];
   /** Set once the case study page exists, so cards without one stay unlinked. */
@@ -31,7 +33,7 @@ export const projects: Project[] = [
     slug: "xchange",
     title: "Xchange",
     year: "2026",
-    image: "/projects/xchange.png",
+    image: "/projects/xchange/hero-photo.png",
     tags: ["Product Design", "Vibe Coding"],
     href: "/works/xchange",
   },
@@ -48,6 +50,7 @@ export const projects: Project[] = [
     title: "Sound Playground",
     year: "2024",
     image: "/projects/sound-playground.png",
+    video: "/projects/sound/hero.mp4",
     tags: ["Sound Design", "Interactive"],
     href: "/works/sound-playground",
   },

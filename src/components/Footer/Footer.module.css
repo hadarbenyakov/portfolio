@@ -30,15 +30,13 @@
   line-height: 1.45;
   letter-spacing: -0.005em;
   color: var(--color-fg-muted);
+  transition: color var(--dur-hover) var(--ease-out-cubic);
 }
 
-.underlined {
-  text-decoration: underline;
-  text-underline-position: from-font;
-}
-
-.link:hover {
-  color: var(--color-fg);
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-fg);
+  }
 }
 
 @media (--tablet) {

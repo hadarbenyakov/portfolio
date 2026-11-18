@@ -17,7 +17,8 @@
   height: 26px;
   background: var(--arrow-prev, url("/projects/mycora/nav-arrow.svg")) no-repeat center /
     contain;
-  transition: opacity 150ms ease, transform 150ms ease;
+  transition: opacity var(--dur-hover) var(--ease-out-cubic),
+    transform 300ms var(--ease-out-quint);
 }
 
 .next {
@@ -25,16 +26,31 @@
   transform: rotate(180deg);
 }
 
-.arrow:hover {
-  opacity: 0.6;
+@media (hover: hover) {
+  .arrow:hover {
+    opacity: 0.6;
+  }
 }
 
-.next:hover {
-  transform: rotate(180deg) translateX(2px);
+/* Arrow leans in the direction it points; a press squeezes it. */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .next:hover {
+    transform: rotate(180deg) translateX(-5px);
+  }
+
+  .arrow:not(.next):hover {
+    transform: translateX(-5px);
+  }
 }
 
-.arrow:not(.next):hover {
-  transform: translateX(-2px);
+@media (prefers-reduced-motion: no-preference) {
+  .arrow:not(.next):active {
+    transform: translateX(-5px) scale(0.88);
+  }
+
+  .next:active {
+    transform: rotate(180deg) translateX(-5px) scale(0.88);
+  }
 }
 
 /* Kept in the layout so the row stays balanced at the ends of the series. */
